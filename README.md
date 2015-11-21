@@ -23,4 +23,11 @@ Track time and materials used to build costumes. Either to track for personal pr
 ## Advanced Features
 
 1. User can upload project pictures
+
 	
+##ERD
+
+https://www.lucidchart.com/documents/view/05cdd8a1-e3bd-4596-abf9-038a7150d08c
+
+##Wireframe
+https://www.lucidchart.com/documents/view/bb2d594f-8b75-4366-9780-7e66b08e4072
