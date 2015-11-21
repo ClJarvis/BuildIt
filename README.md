@@ -4,14 +4,14 @@ Track time and materials used to build projects. Either to track for personal pr
 
 ## Features
 
-- Freelancer project tracker
+- Freelance project tracker
 
-## Basic Acceptance Criteria
+## Basic Features
 
 1. User will be able to register for Build and Bill.
 2. User will be able to name each project.
 3. User will be able to input time spent building the project.
-4. User will be able to quantities and cost of materials used on project.
+4. User will be able to total quantities and cost of materials used on project.
 5. User will be able to multiply cost x amount to get a total for each item used in project.
 6. User will be able to total all material costs in a project.
 7. User will be able to total time spent on project.
@@ -19,7 +19,7 @@ Track time and materials used to build projects. Either to track for personal pr
 9. User will be able to multiply hourly rate times project hours for a total.
 10. User can enter an estimated time to completion	
 
-## Advanced Acceptance Criteria
+## Advanced Features
 
 1. User will be able to create an inventory of materials
 2. User will be able to subtract material used in project from inventory. 
