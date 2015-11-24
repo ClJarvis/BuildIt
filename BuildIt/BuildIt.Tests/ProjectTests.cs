@@ -17,11 +17,17 @@ namespace BuildIt.Tests
         [TestMethod]
         public void EnsureProjectPropertiesWork()
         {
+            //Begin Arrange
             Project project = new Project { Name = "My First Project" };
+            //End Arrange
 
+            //Begin Act
+            //End Act
 
+            //Begin Assert
             Assert.AreEqual("My First Project", project.Name);
 
+            //End Assert
         }
     }
 }
