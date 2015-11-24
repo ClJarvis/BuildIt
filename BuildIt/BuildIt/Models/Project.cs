@@ -11,6 +11,6 @@ namespace BuildIt.Models
         public string Name { get; set; }
         public int UserID { get; set; }
         public DateTime StartDate { get; set; }
-        
+        public List<Inventory> ProjectInventory { get; set; }
     }
 }
