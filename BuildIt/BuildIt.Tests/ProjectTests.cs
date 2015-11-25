@@ -7,6 +7,26 @@ namespace BuildIt.Tests
     [TestClass]
     public class ProjectTests
     {
+        /// <summary>
+        ///////////////////////Inventory Tests //////////////////////////////////
+        /// </summary>
+        [TestMethod]
+        public void InventoryEnsureIcanCreateAnInventory()
+        {
+            Inventory inventory = new Inventory();
+            Assert.IsNotNull(inventory);
+        }
+
+        [TestMethod]
+        public void InventoryEnsureICanDeleteAnInventory()
+        {
+            ///create a Mock Inventory the delete it
+        }
+
+
+        /// <summary>
+        /// //////////////////Project Tests ////////////////////////////////////////
+        /// </summary>
         [TestMethod]
         public void EnsureICanCreatAnInstanceAProject()
         {
