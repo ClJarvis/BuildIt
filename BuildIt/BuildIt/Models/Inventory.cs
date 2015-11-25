@@ -7,5 +7,8 @@ namespace BuildIt.Models
 {
     public class Inventory
     {
+        public String FabricName { get; set; }
+        public int FabricAmount { get; set; }
+        public String FabricColor { get; set; }
     }
 }
