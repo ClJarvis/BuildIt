@@ -20,7 +20,7 @@ namespace BuildIt.Tests
         [TestMethod]
         public void InventoryEnsureICanDeleteAnInventory()
         {
-            ///create a Mock Inventory the delete it
+            ///create a Mock Inventory then delete it
         }
 
 
@@ -34,11 +34,13 @@ namespace BuildIt.Tests
             Assert.IsNotNull(project);
         }
 
+
         [TestMethod]
         public void EnsureProjectPropertiesWork()
         {
             //Begin Arrange
             Project project = new Project { Name = "My First Project" };
+            
             //End Arrange
 
             //Begin Act
