@@ -70,6 +70,5 @@ C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\Microsoft.Owin.Secur
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\obj\Debug\BuildIt.csprojResolveAssemblyReference.cache
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\obj\Debug\BuildIt.dll
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\obj\Debug\BuildIt.pdb
