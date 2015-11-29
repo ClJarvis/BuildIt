@@ -8,7 +8,8 @@ namespace BuildIt.Models
 {
     
         public class InventoryContent : DbContext
-        { 
+        {
+        public string fabricName { get; set; }
         public virtual DbSet<Inventory> Inventory { get; set; }
         }
     
