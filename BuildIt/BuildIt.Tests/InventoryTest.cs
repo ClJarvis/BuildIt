@@ -1,15 +1,28 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BuildIt.Models;
+using Moq;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BuildIt.Tests
 {
     [TestClass]
     public class InventoryTest
     {
-        /// <summary>
-        ///////////////////////Inventory Tests //////////////////////////////////
-        /// </summary>
+        private Mock <InventoryContent> mock_content;
+        private Mock<Dbset<Inventory>> mock_Inventory;
+        private List<Inventory> my_inventory;
+        
+
+        private void ConnectsMocksToDataSource()
+        {
+            var data = my_inventory.AsQueryable();
+
+            mock_Inventory.As<IQueryable<Inventory>().Setup(m => mock_Inventory.Provider).Returns(data.Provider);
+        }
+
+
         [TestMethod]
         public void InventoryEnsureIcanCreateAnInventory()
         {
@@ -22,7 +35,7 @@ namespace BuildIt.Tests
         {
             //Begin Arrange
             Inventory InventoryContent = new Inventory { FabricType = "linen", FabricColor = "tan", FabricAmount = 5, FabricUnit = "yards" };
-            Inventory.Project.Add(ProjectItems);
+            //Inventory.Project.Add(ProjectItems);
             //End Arrange
 
             //Begin Act
@@ -41,7 +54,7 @@ namespace BuildIt.Tests
         {
             ///create a Mock Inventory then delete it
         }
-
+       
 
     }
 }
