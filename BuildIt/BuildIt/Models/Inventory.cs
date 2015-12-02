@@ -10,13 +10,18 @@ namespace BuildIt.Models
         private   InventoryContent content;
 
         public String FabricType { get; set; }
+        public String FabricColor { get; set; }
         public int FabricAmount { get; set; }
         public String FabricUnit { get; set; }
-        public String FabricColor { get; set; }
+       
+        public virtual object Project { get; set; }
 
         public Inventory()
         {
             content = new InventoryContent();
+           // Project Project = new List<Project>();
         }
+
+       
     }
 }
