@@ -1,7 +1,5 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BuildIt.Models;
-using Moq;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,7 +8,7 @@ namespace BuildIt.Tests
     [TestClass]
     public class InventoryTest
     {
-        private Mock <InventoryContent> mock_content;
+        private Mock <InventoryContext> mock_content;
         private Mock<Dbset<Inventory>> mock_Inventory;
         private List<Inventory> my_inventory;
         
@@ -54,7 +52,9 @@ namespace BuildIt.Tests
         {
             ///create a Mock Inventory then delete it
         }
-       
 
+        private class Mock<T>
+        {
+        }
     }
 }
