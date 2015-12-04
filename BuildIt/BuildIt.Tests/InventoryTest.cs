@@ -2,14 +2,16 @@
 using BuildIt.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
+using Moq;
 
 namespace BuildIt.Tests
 {
     [TestClass]
     public class InventoryTest
     {
-        private Mock <InventoryContext> mock_content;
-        private Mock<Dbset<Inventory>> mock_Inventory;
+        private Mock<InventoryContext> mock_content;
+        private Mock<IDbSet<Inventory>> mock_Inventory;
         private List<Inventory> my_inventory;
         
 
@@ -17,7 +19,7 @@ namespace BuildIt.Tests
         {
             var data = my_inventory.AsQueryable();
 
-            mock_Inventory.As<IQueryable<Inventory>().Setup(m => mock_Inventory.Provider).Returns(data.Provider);
+          //  mock_Inventory.As<IQueryable<Inventory>().Setup(m => mock_Inventory.Provider).Returns(data.Provider);
         }
 
 
@@ -53,8 +55,6 @@ namespace BuildIt.Tests
             ///create a Mock Inventory then delete it
         }
 
-        private class Mock<T>
-        {
-        }
+      
     }
 }
