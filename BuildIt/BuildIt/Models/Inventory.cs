@@ -8,7 +8,7 @@ namespace BuildIt.Models
 {
     public class Inventory
     {
-        private   InventoryContext content;
+        private   InventoryContext context;
 
         public String FabricType { get; set; }
         public String FabricColor { get; set; }
@@ -19,7 +19,7 @@ namespace BuildIt.Models
 
         public Inventory()
         {
-            content = new InventoryContext();
+            context = new InventoryContext();
            // Project Project = new List<Project>();
         }
 

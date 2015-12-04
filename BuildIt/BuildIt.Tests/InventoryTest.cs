@@ -10,7 +10,7 @@ namespace BuildIt.Tests
     [TestClass]
     public class InventoryTest
     {
-        private Mock<InventoryContext> mock_content;
+        private Mock<InventoryContext> mock_context;
         private Mock<IDbSet<Inventory>> mock_Inventory;
         private List<Inventory> my_inventory;
         
@@ -19,7 +19,19 @@ namespace BuildIt.Tests
         {
             var data = my_inventory.AsQueryable();
 
-          //  mock_Inventory.As<IQueryable<Inventory>().Setup(m => mock_Inventory.Provider).Returns(data.Provider);
+            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Provider).Returns(data.Provider);
+            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Expression).Returns(data.Expression);
+
+            mock_context.Setup(m => m.Inventory).Returns(mock_Inventory.Object);
+        }
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            mock_context = new Mock<InventoryContext>();
+            mock_Inventory = new Mock<IDbSet<Inventory>>();
         }
 
 
