@@ -13,6 +13,7 @@ namespace BuildIt.Tests
         private Mock<InventoryContext> mock_context;
         private Mock<IDbSet<Inventory>> mock_Inventory;
         private List<Inventory> my_inventory;
+        private ApplicationUser owner, user1;
         
 
         private void ConnectsMocksToDataSource()
@@ -32,6 +33,17 @@ namespace BuildIt.Tests
         {
             mock_context = new Mock<InventoryContext>();
             mock_Inventory = new Mock<IDbSet<Inventory>>();
+            my_inventory = new List<Inventory>();
+            owner = new ApplicationUser();
+            user1 = new ApplicationUser();
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            mock_context = null;
+            mock_Inventory = null;
+            my_inventory = null;
         }
 
 
@@ -64,7 +76,26 @@ namespace BuildIt.Tests
         [TestMethod]
         public void InventoryEnsureICanDeleteAnInventory()
         {
-            ///create a Mock Inventory then delete it
+            //Begin Arrange
+            var data = my_inventory.AsQueryable(); 
+
+            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Provider).Returns(data.Provider);
+            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Expression).Returns(data.Expression);
+           
+            mock_Inventory.Setup(m => m.Add(It.IsAny<Inventory>())).Callback((Inventory i) => my_inventory.Add(i));
+            mock_Inventory.Setup(m => m.Remove(It.IsAny<Inventory>())).Callback((Inventory i) => my_inventory.Remove(i));
+            mock_Inventory.Setup(m => m.Inventory).Returns(mock_Inventory.Object);
+
+
+            //End Arrange
+
+            //Begin Act
+            //End Act
+
+            //Begin Assert
+            //End Assert
         }
 
       
