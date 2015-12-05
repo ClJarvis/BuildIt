@@ -8,8 +8,10 @@ namespace BuildIt.Models
 {
     public class Inventory
     {
-        private   InventoryContext content;
+        private   InventoryContext context;
+        internal ApplicationUser Owner;
 
+        public string Title { get; set; }
         public String FabricType { get; set; }
         public String FabricColor { get; set; }
         public int FabricAmount { get; set; }
@@ -19,7 +21,7 @@ namespace BuildIt.Models
 
         public Inventory()
         {
-            content = new InventoryContext();
+            context = new InventoryContext();
            // Project Project = new List<Project>();
         }
 
