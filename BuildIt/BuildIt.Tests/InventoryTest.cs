@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BuildIt.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,12 +87,11 @@ namespace BuildIt.Tests
            
             mock_Inventory.Setup(m => m.Add(It.IsAny<Inventory>())).Callback((Inventory i) => my_inventory.Add(i));
             mock_Inventory.Setup(m => m.Remove(It.IsAny<Inventory>())).Callback((Inventory i) => my_inventory.Remove(i));
-            mock_Inventory.Setup(m => m.Inventory).Returns(mock_Inventory.Object);
-
-
+            mock_context.Setup(m => m.Inventory).Returns(mock_Inventory.Object);
             //End Arrange
 
             //Begin Act
+            Inventory removed_Inventory = InventoryRepository.CreateInventory(title, owner);
             //End Act
 
             //Begin Assert

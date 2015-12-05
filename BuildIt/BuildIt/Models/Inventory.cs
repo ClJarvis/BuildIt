@@ -9,7 +9,9 @@ namespace BuildIt.Models
     public class Inventory
     {
         private   InventoryContext context;
+        internal ApplicationUser Owner;
 
+        public string Title { get; set; }
         public String FabricType { get; set; }
         public String FabricColor { get; set; }
         public int FabricAmount { get; set; }
