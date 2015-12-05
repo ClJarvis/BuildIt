@@ -19,6 +19,7 @@ namespace BuildIt.Models
         {
             context = _context;
         }
+
         public Inventory CreateInventory(string title, ApplicationUser owner)
         {
             Inventory my_Inventory = new Inventory { Title = title, Owner = owner };

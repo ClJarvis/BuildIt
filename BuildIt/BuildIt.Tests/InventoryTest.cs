@@ -78,7 +78,8 @@ namespace BuildIt.Tests
         public void InventoryEnsureICanDeleteAnInventory()
         {
             //Begin Arrange
-            var data = my_inventory.AsQueryable(); 
+            var data = my_inventory.AsQueryable();
+            string title = "My Inventory";
 
             mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Provider).Returns(data.Provider);
             mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
@@ -91,7 +92,9 @@ namespace BuildIt.Tests
             //End Arrange
 
             //Begin Act
-            Inventory removed_Inventory = InventoryRepository.CreateInventory(title, owner);
+            var repo = new InventoryRepository();
+            
+            Inventory removed_Inventory = repo.CreateInventory(title, owner);
             //End Act
 
             //Begin Assert
