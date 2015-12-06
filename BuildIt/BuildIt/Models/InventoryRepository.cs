@@ -28,5 +28,18 @@ namespace BuildIt.Models
 
             return my_Inventory;
         }
+
+        public int GetInventoryCount()
+        {
+            var query = from i in context.Inventory select i;
+            return query.Count();
+        }
+
+        public void DeleteInventory(Inventory removed_inventory)
+        {
+            Inventory my_inventory = removed_inventory;
+            context.Inventory.Remove(my_inventory);
+            context.SaveChanges();
+        }
     }
 }
