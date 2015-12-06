@@ -73,12 +73,14 @@ namespace BuildIt.Tests
             Assert.AreEqual("yards", InventoryContent.FabricUnit);
             //End Assert
         }
-
+        //[Inventory]
         [TestMethod]
+        
         public void InventoryEnsureICanDeleteAnInventory()
         {
             //Begin Arrange
-            var data = my_inventory.AsQueryable(); 
+            var data = my_inventory.AsQueryable();
+            string title = "My Inventory";
 
             mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Provider).Returns(data.Provider);
             mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
@@ -91,13 +93,25 @@ namespace BuildIt.Tests
             //End Arrange
 
             //Begin Act
-            Inventory removed_Inventory = InventoryRepository.CreateInventory(title, owner);
+            var repo = new InventoryRepository();
+            
+            Inventory removed_Inventory = repo.CreateInventory(title, owner);
             //End Act
 
             //Begin Assert
+            Assert.IsNotNull(removed_Inventory);
+            mock_Inventory.Verify(m => m.Add(It.IsAny<Inventory>()));
+            mock_context.Verify(x => x.SaveChanges(), Times.Once());
+            Assert.AreEqual(1, repo.GetInventoryCount());
+            repo.DeleteInventory(removed_Inventory);
+            mock_context.Verify(x => x.SaveChanges(), Times.Exactly(2));
+            Assert.AreEqual(0, repo.GetInventoryCount());
+
             //End Assert
         }
 
-      
+        private class InventoryAttribute : Attribute
+        {
+        }
     }
 }
