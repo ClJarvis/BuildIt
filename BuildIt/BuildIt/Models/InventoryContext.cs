@@ -10,6 +10,8 @@ namespace BuildIt.Models
     
         public class InventoryContext : DbContext
         {
+        public object Project;
+
         public string fabricName { get; set; }
         public virtual IDbSet<Inventory> Inventory { get; set; }
         }

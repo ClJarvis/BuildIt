@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using BuildIt.Models;
+
 
 namespace BuildIt.Models
 {
@@ -40,6 +42,28 @@ namespace BuildIt.Models
             Inventory my_inventory = removed_inventory;
             context.Inventory.Remove(my_inventory);
             context.SaveChanges();
+        }
+
+        public void DeleteProject(Project removed_project)
+        {
+            Project my_project = removed_project;
+   //         context.Inventory.Remove(my_Inventory);
+            context.SaveChanges();
+        }
+
+        public int GetProjectCount()
+        {
+            var query = from i in context.Inventory select i;
+            return query.Count();
+        }
+
+        public Project CreateProject(string v, ApplicationUser owner)
+        {
+            Project my_Project = new Project { ProjectName = "title", Owner = owner };
+        //    context.Project.Add(my_Project);
+            context.SaveChanges();
+
+            return my_Project;
         }
     }
 }

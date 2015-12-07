@@ -14,8 +14,10 @@ namespace BuildIt.Tests
         private Mock<InventoryContext> mock_context;
         private Mock<IDbSet<Inventory>> mock_Inventory;
         private List<Inventory> my_inventory;
-        private ApplicationUser owner, user1;
-        
+        public ApplicationUser owner, user1;
+        private List<Project> my_project;
+        private Mock<IDbSet<Project>> mock_Project;
+
 
         private void ConnectsMocksToDataSource()
         {
@@ -35,6 +37,7 @@ namespace BuildIt.Tests
             mock_context = new Mock<InventoryContext>();
             mock_Inventory = new Mock<IDbSet<Inventory>>();
             my_inventory = new List<Inventory>();
+            my_project = new List<Project>();
             owner = new ApplicationUser();
             user1 = new ApplicationUser();
         }
@@ -73,7 +76,7 @@ namespace BuildIt.Tests
             Assert.AreEqual("yards", InventoryContent.FabricUnit);
             //End Assert
         }
-        //[Inventory]
+        
         [TestMethod]
         
         public void InventoryEnsureICanDeleteAnInventory()
@@ -90,10 +93,12 @@ namespace BuildIt.Tests
             mock_Inventory.Setup(m => m.Add(It.IsAny<Inventory>())).Callback((Inventory i) => my_inventory.Add(i));
             mock_Inventory.Setup(m => m.Remove(It.IsAny<Inventory>())).Callback((Inventory i) => my_inventory.Remove(i));
             mock_context.Setup(m => m.Inventory).Returns(mock_Inventory.Object);
+
+            InventoryRepository repo = new InventoryRepository(mock_context.Object);
             //End Arrange
 
             //Begin Act
-            var repo = new InventoryRepository();
+           // var repo = new InventoryRepository();
             
             Inventory removed_Inventory = repo.CreateInventory(title, owner);
             //End Act
@@ -104,9 +109,94 @@ namespace BuildIt.Tests
             mock_context.Verify(x => x.SaveChanges(), Times.Once());
             Assert.AreEqual(1, repo.GetInventoryCount());
             repo.DeleteInventory(removed_Inventory);
+            mock_Inventory.Verify(x => x.Remove(It.IsAny<Inventory>()));
             mock_context.Verify(x => x.SaveChanges(), Times.Exactly(2));
             Assert.AreEqual(0, repo.GetInventoryCount());
 
+            //End Assert
+        }
+
+        [TestMethod]
+        public void EnsureICanDeleteAProjectFromAnInventory()
+        {
+            //Begin Arrange
+            var data = my_project.AsQueryable();
+            string ProjectName = "My Inventory";
+            
+            InventoryRepository repo = new InventoryRepository(mock_context.Object);
+            Project project = new Project { ProjectName = "ToDo", ProjectId = 1 };
+            my_project.Remove(new Project { ProjectName = "My Current Project", Owner = user1});
+
+            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Provider).Returns(data.Provider);
+            mock_Inventory.As<IQueryable<Project>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Expression).Returns(data.Expression);
+
+
+            mock_Inventory.Setup(m => m.Add(It.IsAny<Inventory>())).Callback((Inventory p) => my_inventory.Add(p));
+            mock_Inventory.Setup(m => m.Remove(It.IsAny<Inventory> ())).Callback((Inventory p) => my_inventory.Remove(p));
+            mock_context.Setup(m => m.Inventory).Returns(mock_Inventory.Object);
+
+           
+            //End Arrange
+
+            //Begin Act
+
+            Project removed_project = repo.CreateProject("My Material Inventory", owner);
+
+            //End Act
+            //Begin Assert
+            Assert.IsNotNull(removed_project);
+            mock_Project.Verify(m => m.Add(It.IsAny<Project>()));
+            mock_context.Verify(x => x.SaveChanges(), Times.Once());
+            Assert.AreEqual(0, repo.GetProjectCount());
+            repo.DeleteProject(removed_project);
+            mock_Inventory.Verify(x => x.Remove(It.IsAny<Inventory>()));
+            mock_context.Verify(x => x.SaveChanges(), Times.Exactly(2));
+            Assert.AreEqual(0, repo.GetProjectCount());
+            //End Assert    
+        }
+
+        [TestMethod]
+        public void ListEnsureICanEditAProject()
+        {
+            //Begin Arrange
+            var data = my_project.AsQueryable();
+           InventoryRepository repo = new InventoryRepository(mock_context.Object);
+            Project list = new Project { ProjectName = "ToDo", ProjectId = 1 };
+            my_project.Remove(new Project { ProjectName = "My First Project", Owner = user1, ProjectId = 1 });
+
+            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Provider).Returns(data.Provider);
+            mock_Inventory.As<IQueryable<Project>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Expression).Returns(data.Expression);
+
+            mock_Inventory.Setup(m => m.Add(It.IsAny<Inventory>())).Callback((Inventory p) => my_inventory.Add(p));
+            mock_Inventory.Setup(m => m.Remove(It.IsAny<Inventory>())).Callback((Inventory p) => my_inventory.Remove(p));
+            mock_context.Setup(m => m.Inventory).Returns(mock_Inventory.Object);
+            //End Arrange
+
+            //Begin Act
+
+            Inventory removed_project = repo.CreateInventory("My Inventory", owner);
+
+            Project Updatedproject = new Project { ProjectName = "ToDo", ProjectId = 1 };
+            my_project.Add(new Project { ProjectName = "My Next Board", Owner = user1, ProjectId = 1 });
+            //End Act
+
+            //Begin Assert
+            Assert.IsNotNull(removed_project);
+            mock_Inventory.Verify(m => m.Add(It.IsAny<Inventory>()));
+            mock_context.Verify(x => x.SaveChanges(), Times.Once());
+            Assert.AreEqual(0, repo.GetInventoryCount());
+            
+            mock_Inventory.Verify(x => x.Remove(It.IsAny<Inventory>()));
+            mock_context.Verify(x => x.SaveChanges(), Times.Exactly(2));
+            Assert.AreEqual(0, repo.GetInventoryCount());
+            string expected = my_project.ToString();
+            string actual = "my new project";
+          
+            Assert.AreEqual(expected, actual);
             //End Assert
         }
 
