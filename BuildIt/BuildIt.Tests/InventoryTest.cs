@@ -28,7 +28,7 @@ namespace BuildIt.Tests
             mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.ElementType).Returns(data.ElementType);
             mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Expression).Returns(data.Expression);
 
-            mock_context.Setup(m => m.Inventory).Returns(mock_Inventory.Object);
+            mock_context.Setup(m => m.Inventories).Returns(mock_Inventory.Object);
         }
 
         [TestInitialize]
@@ -36,6 +36,7 @@ namespace BuildIt.Tests
         {
             mock_context = new Mock<InventoryContext>();
             mock_Inventory = new Mock<IDbSet<Inventory>>();
+            mock_Project = new Mock<IDbSet<Project>>();
             my_inventory = new List<Inventory>();
             my_project = new List<Project>();
             owner = new ApplicationUser();
@@ -92,7 +93,7 @@ namespace BuildIt.Tests
            
             mock_Inventory.Setup(m => m.Add(It.IsAny<Inventory>())).Callback((Inventory i) => my_inventory.Add(i));
             mock_Inventory.Setup(m => m.Remove(It.IsAny<Inventory>())).Callback((Inventory i) => my_inventory.Remove(i));
-            mock_context.Setup(m => m.Inventory).Returns(mock_Inventory.Object);
+            mock_context.Setup(m => m.Inventories).Returns(mock_Inventory.Object);
 
             InventoryRepository repo = new InventoryRepository(mock_context.Object);
             //End Arrange
@@ -123,7 +124,7 @@ namespace BuildIt.Tests
             var data = my_project.AsQueryable();
             string ProjectName = "My Inventory";
             
-            InventoryRepository repo = new InventoryRepository(mock_context.Object);
+           // InventoryRepository repo = new InventoryRepository(mock_context.Object);
             Project project = new Project { ProjectName = "ToDo", ProjectId = 1 };
             my_project.Remove(new Project { ProjectName = "My Current Project", Owner = user1});
 
@@ -135,9 +136,9 @@ namespace BuildIt.Tests
 
             mock_Inventory.Setup(m => m.Add(It.IsAny<Inventory>())).Callback((Inventory p) => my_inventory.Add(p));
             mock_Inventory.Setup(m => m.Remove(It.IsAny<Inventory> ())).Callback((Inventory p) => my_inventory.Remove(p));
-            mock_context.Setup(m => m.Inventory).Returns(mock_Inventory.Object);
+            mock_context.Setup(m => m.Inventories).Returns(mock_Inventory.Object);
 
-           
+            InventoryRepository repo = new InventoryRepository(mock_context.Object);
             //End Arrange
 
             //Begin Act
@@ -147,7 +148,7 @@ namespace BuildIt.Tests
             //End Act
             //Begin Assert
             Assert.IsNotNull(removed_project);
-            mock_Project.Verify(m => m.Add(It.IsAny<Project>()));
+            mock_Project.Verify(m => m.Add(It.IsAny<Project>()));   /////////////////////
             mock_context.Verify(x => x.SaveChanges(), Times.Once());
             Assert.AreEqual(0, repo.GetProjectCount());
             repo.DeleteProject(removed_project);
@@ -162,7 +163,7 @@ namespace BuildIt.Tests
         {
             //Begin Arrange
             var data = my_project.AsQueryable();
-           InventoryRepository repo = new InventoryRepository(mock_context.Object);
+            InventoryRepository repo = new InventoryRepository(mock_context.Object);
             Project list = new Project { ProjectName = "ToDo", ProjectId = 1 };
             my_project.Remove(new Project { ProjectName = "My First Project", Owner = user1, ProjectId = 1 });
 
@@ -173,7 +174,7 @@ namespace BuildIt.Tests
 
             mock_Inventory.Setup(m => m.Add(It.IsAny<Inventory>())).Callback((Inventory p) => my_inventory.Add(p));
             mock_Inventory.Setup(m => m.Remove(It.IsAny<Inventory>())).Callback((Inventory p) => my_inventory.Remove(p));
-            mock_context.Setup(m => m.Inventory).Returns(mock_Inventory.Object);
+            mock_context.Setup(m => m.Inventories).Returns(mock_Inventory.Object);
             //End Arrange
 
             //Begin Act
@@ -200,8 +201,6 @@ namespace BuildIt.Tests
             //End Assert
         }
 
-        private class InventoryAttribute : Attribute
-        {
-        }
+      
     }
 }

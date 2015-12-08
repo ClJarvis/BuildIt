@@ -8,12 +8,12 @@ using System.Data.Entity;
 namespace BuildIt.Models
 {
     
-        public class InventoryContext : DbContext
+        public class InventoryContext :ApplicationDbContext
         {
-        public object Project;
+     
 
-        public string fabricName { get; set; }
-        public virtual IDbSet<Inventory> Inventory { get; set; }
+        public virtual IDbSet<Inventory> Inventories { get; set; }
+        public virtual IDbSet<Project> Projects { get; set; }
         }
     
 }
