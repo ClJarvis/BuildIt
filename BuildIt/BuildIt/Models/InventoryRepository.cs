@@ -50,8 +50,7 @@ namespace BuildIt.Models
         {
             
             Project my_Project = new Project { ProjectName = "My Currect Project", Owner = owner };
-            InventoryContext inventoryContext = new InventoryContext();
-            inventoryContext.Projects.Add(my_Project);
+            context.Projects.Add(my_Project);
             context.SaveChanges();
 
             return my_Project;
@@ -67,8 +66,7 @@ namespace BuildIt.Models
 
         public int GetProjectCount()
         {
-            var query = from i in context.Inventories select i;
-            return query.Count();
+            return context.Projects.Count();
         }
         
     }
