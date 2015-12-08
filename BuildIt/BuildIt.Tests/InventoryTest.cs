@@ -12,32 +12,33 @@ namespace BuildIt.Tests
     public class InventoryTest
     {
         private Mock<InventoryContext> mock_context;
-        private Mock<IDbSet<Inventory>> mock_Inventory;
-        private List<Inventory> my_inventory;
+        private Mock<IDbSet<Inventory>> mock_Inventories;
+        private List<Inventory> my_inventories;
         public ApplicationUser owner, user1;
-        private List<Project> my_project;
-        private Mock<IDbSet<Project>> mock_Project;
+        private List<Project> my_projects;
+        private Mock<IDbSet<Project>> mock_Projects;
 
 
         private void ConnectsMocksToDataSource()
         {
-            var data = my_inventory.AsQueryable();
+            var data = my_inventories.AsQueryable();
 
-            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Provider).Returns(data.Provider);
-            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Expression).Returns(data.Expression);
+            mock_Inventories.As<IQueryable<Inventory>>().Setup(m => m.Provider).Returns(data.Provider);
+            mock_Inventories.As<IQueryable<Inventory>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mock_Inventories.As<IQueryable<Inventory>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mock_Inventories.As<IQueryable<Inventory>>().Setup(m => m.Expression).Returns(data.Expression);
 
-            mock_context.Setup(m => m.Inventory).Returns(mock_Inventory.Object);
+            mock_context.Setup(m => m.Inventories).Returns(mock_Inventories.Object);
         }
 
         [TestInitialize]
         public void Initialize()
         {
             mock_context = new Mock<InventoryContext>();
-            mock_Inventory = new Mock<IDbSet<Inventory>>();
-            my_inventory = new List<Inventory>();
-            my_project = new List<Project>();
+            mock_Inventories = new Mock<IDbSet<Inventory>>();
+            mock_Projects = new Mock<IDbSet<Project>>();
+            my_inventories = new List<Inventory>();
+            my_projects = new List<Project>();
             owner = new ApplicationUser();
             user1 = new ApplicationUser();
         }
@@ -46,8 +47,8 @@ namespace BuildIt.Tests
         public void Cleanup()
         {
             mock_context = null;
-            mock_Inventory = null;
-            my_inventory = null;
+            mock_Inventories = null;
+            my_inventories = null;
         }
 
 
@@ -82,17 +83,17 @@ namespace BuildIt.Tests
         public void InventoryEnsureICanDeleteAnInventory()
         {
             //Begin Arrange
-            var data = my_inventory.AsQueryable();
+            var data = my_inventories.AsQueryable();
             string title = "My Inventory";
 
-            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Provider).Returns(data.Provider);
-            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Expression).Returns(data.Expression);
+            mock_Inventories.As<IQueryable<Inventory>>().Setup(m => m.Provider).Returns(data.Provider);
+            mock_Inventories.As<IQueryable<Inventory>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mock_Inventories.As<IQueryable<Inventory>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mock_Inventories.As<IQueryable<Inventory>>().Setup(m => m.Expression).Returns(data.Expression);
            
-            mock_Inventory.Setup(m => m.Add(It.IsAny<Inventory>())).Callback((Inventory i) => my_inventory.Add(i));
-            mock_Inventory.Setup(m => m.Remove(It.IsAny<Inventory>())).Callback((Inventory i) => my_inventory.Remove(i));
-            mock_context.Setup(m => m.Inventory).Returns(mock_Inventory.Object);
+            mock_Inventories.Setup(m => m.Add(It.IsAny<Inventory>())).Callback((Inventory i) => my_inventories.Add(i));
+            mock_Inventories.Setup(m => m.Remove(It.IsAny<Inventory>())).Callback((Inventory i) => my_inventories.Remove(i));
+            mock_context.Setup(m => m.Inventories).Returns(mock_Inventories.Object);
 
             InventoryRepository repo = new InventoryRepository(mock_context.Object);
             //End Arrange
@@ -105,11 +106,11 @@ namespace BuildIt.Tests
 
             //Begin Assert
             Assert.IsNotNull(removed_Inventory);
-            mock_Inventory.Verify(m => m.Add(It.IsAny<Inventory>()));
+            mock_Inventories.Verify(m => m.Add(It.IsAny<Inventory>()));
             mock_context.Verify(x => x.SaveChanges(), Times.Once());
             Assert.AreEqual(1, repo.GetInventoryCount());
             repo.DeleteInventory(removed_Inventory);
-            mock_Inventory.Verify(x => x.Remove(It.IsAny<Inventory>()));
+            mock_Inventories.Verify(x => x.Remove(It.IsAny<Inventory>()));
             mock_context.Verify(x => x.SaveChanges(), Times.Exactly(2));
             Assert.AreEqual(0, repo.GetInventoryCount());
 
@@ -120,38 +121,38 @@ namespace BuildIt.Tests
         public void EnsureICanDeleteAProjectFromAnInventory()
         {
             //Begin Arrange
-            var data = my_project.AsQueryable();
+            var data = my_projects.AsQueryable();
             string ProjectName = "My Inventory";
             
-            InventoryRepository repo = new InventoryRepository(mock_context.Object);
+           // InventoryRepository repo = new InventoryRepository(mock_context.Object);
             Project project = new Project { ProjectName = "ToDo", ProjectId = 1 };
-            my_project.Remove(new Project { ProjectName = "My Current Project", Owner = user1});
+            my_projects.Remove(new Project { ProjectName = "My Current Project", Owner = user1});
 
-            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Provider).Returns(data.Provider);
-            mock_Inventory.As<IQueryable<Project>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Expression).Returns(data.Expression);
+            mock_Projects.As<IQueryable<Project>>().Setup(m => m.Provider).Returns(data.Provider);
+            mock_Projects.As<IQueryable<Project>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mock_Projects.As<IQueryable<Project>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mock_Projects.As<IQueryable<Project>>().Setup(m => m.Expression).Returns(data.Expression);
 
 
-            mock_Inventory.Setup(m => m.Add(It.IsAny<Inventory>())).Callback((Inventory p) => my_inventory.Add(p));
-            mock_Inventory.Setup(m => m.Remove(It.IsAny<Inventory> ())).Callback((Inventory p) => my_inventory.Remove(p));
-            mock_context.Setup(m => m.Inventory).Returns(mock_Inventory.Object);
+            mock_Projects.Setup(m => m.Add(It.IsAny<Project>())).Callback((Project p) => my_projects.Add(p));
+            mock_Projects.Setup(m => m.Remove(It.IsAny<Project> ())).Callback((Project p) => my_projects.Remove(p));
+            mock_context.Setup(m => m.Projects).Returns(mock_Projects.Object);
 
-           
+            InventoryRepository repo = new InventoryRepository(mock_context.Object);
             //End Arrange
 
             //Begin Act
 
             Project removed_project = repo.CreateProject("My Material Inventory", owner);
-
+           // Project mock_project = new Project();
             //End Act
             //Begin Assert
             Assert.IsNotNull(removed_project);
-            mock_Project.Verify(m => m.Add(It.IsAny<Project>()));
-            mock_context.Verify(x => x.SaveChanges(), Times.Once());
-            Assert.AreEqual(0, repo.GetProjectCount());
+            mock_Projects.Verify(m => m.Add(It.IsAny<Project>()));   /////////////////////
+            mock_context.Verify(x => x.SaveChanges(), Times.AtLeastOnce());
+            Assert.AreEqual(1, repo.GetProjectCount());
             repo.DeleteProject(removed_project);
-            mock_Inventory.Verify(x => x.Remove(It.IsAny<Inventory>()));
+            mock_Inventories.Verify(x => x.Remove(It.IsAny<Inventory>()));
             mock_context.Verify(x => x.SaveChanges(), Times.Exactly(2));
             Assert.AreEqual(0, repo.GetProjectCount());
             //End Assert    
@@ -161,19 +162,19 @@ namespace BuildIt.Tests
         public void ListEnsureICanEditAProject()
         {
             //Begin Arrange
-            var data = my_project.AsQueryable();
-           InventoryRepository repo = new InventoryRepository(mock_context.Object);
+            var data = my_projects.AsQueryable();
+            InventoryRepository repo = new InventoryRepository(mock_context.Object);
             Project list = new Project { ProjectName = "ToDo", ProjectId = 1 };
-            my_project.Remove(new Project { ProjectName = "My First Project", Owner = user1, ProjectId = 1 });
+            my_projects.Remove(new Project { ProjectName = "My First Project", Owner = user1, ProjectId = 1 });
 
-            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Provider).Returns(data.Provider);
-            mock_Inventory.As<IQueryable<Project>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mock_Inventory.As<IQueryable<Inventory>>().Setup(m => m.Expression).Returns(data.Expression);
+            mock_Inventories.As<IQueryable<Inventory>>().Setup(m => m.Provider).Returns(data.Provider);
+            mock_Inventories.As<IQueryable<Project>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mock_Inventories.As<IQueryable<Inventory>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mock_Inventories.As<IQueryable<Inventory>>().Setup(m => m.Expression).Returns(data.Expression);
 
-            mock_Inventory.Setup(m => m.Add(It.IsAny<Inventory>())).Callback((Inventory p) => my_inventory.Add(p));
-            mock_Inventory.Setup(m => m.Remove(It.IsAny<Inventory>())).Callback((Inventory p) => my_inventory.Remove(p));
-            mock_context.Setup(m => m.Inventory).Returns(mock_Inventory.Object);
+            mock_Inventories.Setup(m => m.Add(It.IsAny<Inventory>())).Callback((Inventory p) => my_inventories.Add(p));
+            mock_Inventories.Setup(m => m.Remove(It.IsAny<Inventory>())).Callback((Inventory p) => my_inventories.Remove(p));
+            mock_context.Setup(m => m.Inventories).Returns(mock_Inventories.Object);
             //End Arrange
 
             //Begin Act
@@ -181,27 +182,25 @@ namespace BuildIt.Tests
             Inventory removed_project = repo.CreateInventory("My Inventory", owner);
 
             Project Updatedproject = new Project { ProjectName = "ToDo", ProjectId = 1 };
-            my_project.Add(new Project { ProjectName = "My Next Board", Owner = user1, ProjectId = 1 });
+            my_projects.Add(new Project { ProjectName = "My Next Board", Owner = user1, ProjectId = 1 });
             //End Act
 
             //Begin Assert
             Assert.IsNotNull(removed_project);
-            mock_Inventory.Verify(m => m.Add(It.IsAny<Inventory>()));
+            mock_Inventories.Verify(m => m.Add(It.IsAny<Inventory>()));
             mock_context.Verify(x => x.SaveChanges(), Times.Once());
             Assert.AreEqual(0, repo.GetInventoryCount());
             
-            mock_Inventory.Verify(x => x.Remove(It.IsAny<Inventory>()));
+            mock_Inventories.Verify(x => x.Remove(It.IsAny<Inventory>()));
             mock_context.Verify(x => x.SaveChanges(), Times.Exactly(2));
             Assert.AreEqual(0, repo.GetInventoryCount());
-            string expected = my_project.ToString();
+            string expected = my_projects.ToString();
             string actual = "my new project";
           
             Assert.AreEqual(expected, actual);
             //End Assert
         }
 
-        private class InventoryAttribute : Attribute
-        {
-        }
+      
     }
 }

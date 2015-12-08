@@ -11,8 +11,8 @@ namespace BuildIt.Models
     {
         [Key]
         public int InventoryID { get; set; }
-        private   InventoryContext context;
-       public ApplicationUser Owner;
+        //private InventoryContext context;
+        public ApplicationUser Owner { get; set; }
 
         public string Title { get; set; }
         public String FabricType { get; set; }
@@ -23,12 +23,19 @@ namespace BuildIt.Models
        
         public virtual object Project { get; set; }
 
-        public Inventory()
+        public Inventory(string title)
         {
-            context = new InventoryContext();
+            Title = title;
+           // context = new InventoryContext();
            // Project Project = new List<Project>();
         }
 
-       
+        public  Inventory(string title, ApplicationUser owner)
+        {
+            Title = title;
+            Owner = owner;
+        }
+
+        public Inventory() { }
     }
 }
