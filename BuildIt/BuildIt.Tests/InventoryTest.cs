@@ -143,16 +143,17 @@ namespace BuildIt.Tests
 
             //Begin Act
 
-            Project removed_project = repo.CreateProject("My Material Inventory", owner);
-           // Project mock_project = new Project();
+           // Project removed_project = repo.CreateProject("My Material Inventory", owner);
+            Project removed_project = repo.DeleteProject("project", owner);
+            Project mock_project = new Project();
             //End Act
             //Begin Assert
             Assert.IsNotNull(removed_project);
-            mock_Projects.Verify(m => m.Add(It.IsAny<Project>()));   /////////////////////
-            mock_context.Verify(x => x.SaveChanges(), Times.AtLeastOnce());
+            mock_Projects.Verify(m => m.Add(It.IsAny<Project>()));   
+            mock_context.Verify(x => x.SaveChanges(), Times.Once());
             Assert.AreEqual(1, repo.GetProjectCount());
             repo.DeleteProject(removed_project);
-            mock_Inventories.Verify(x => x.Remove(It.IsAny<Inventory>()));
+            mock_Projects.Verify(x => x.Remove(It.IsAny<Project>()));
             mock_context.Verify(x => x.SaveChanges(), Times.Exactly(2));
             Assert.AreEqual(0, repo.GetProjectCount());
             //End Assert    

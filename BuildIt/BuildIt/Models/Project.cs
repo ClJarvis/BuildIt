@@ -23,16 +23,30 @@ namespace BuildIt.Models
             context = new ProjectContext();
             // Project Project = new List<Project>();
         }
-        
-        ////pulled from inventory repo in attempt to fix error
-        /*public void DeleteProject(Project removed_project) 
-        {
-            Project my_project = removed_project;
-            context.Project.Remove(my_project);
-            context.SaveChanges();
-        }
-        */
 
-        
+        public Project(string title)
+        {
+            ProjectName = title;
+            // context = new InventoryContext();
+            // Project Project = new List<Project>();
+        }
+
+        public  Project(string title, ApplicationUser owner)
+        {
+            ProjectName = title;
+            Owner = owner;
+        }
+
+        //public Project() { }
     }
+    ////pulled from inventory repo in attempt to fix error
+    /*public void DeleteProject(Project removed_project) 
+    {
+        Project my_project = removed_project;
+        context.Project.Remove(my_project);
+        context.SaveChanges();
+    }
+    */
+
+
 }
