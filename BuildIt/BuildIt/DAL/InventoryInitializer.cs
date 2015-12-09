@@ -19,6 +19,14 @@ namespace BuildIt.DAL
                 new Inventory {FabricType="Chessecloth", FabricColor="Tan", FabricAmount=2, FabricUnit= "yds"},
                 new Inventory {FabricType="broadcloth", FabricColor="Red", FabricAmount=4, FabricUnit= "yds"}
             };
+
+        /*    fabrics.ForEach(m => context.Projects.Add(f));
+            context.SaveChanges();
+            var materials = new List<Fabric>
+            {
+            new Project {FabricType="broadcloth", FabricColor="Dark Brown", FabricAmount=6, FabricUnit= "yds"},
+             
+            }; */
         }
     }
 }
