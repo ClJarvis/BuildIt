@@ -13,6 +13,8 @@ namespace BuildIt.Models
     {
         private InventoryContext context;
 
+        public Project removed_project { get; private set; }
+
         public InventoryRepository()
         {
             context = new InventoryContext();
@@ -56,18 +58,37 @@ namespace BuildIt.Models
             return my_Project;
         }
         
-        public void DeleteProject(Project removed_project)
+        public Project DeleteProject(Project removed_project)
         {
             Project my_project = removed_project;
             InventoryContext inventoryContext = new InventoryContext();
             inventoryContext.Projects.Remove(my_project);
             context.SaveChanges();
+
+            return my_project;
+        }
+
+        public Project DeleteProject()
+        {
+            Project my_project = removed_project;
+            context = new ProjectContext();
+            // Project Project = new List<Project>();
+            return my_project;
         }
 
         public int GetProjectCount()
         {
             return context.Projects.Count();
         }
-        
+
+        public Project DeleteProject(string v, ApplicationUser owner)
+        {
+            Project my_project = removed_project;
+            InventoryContext inventoryContext = new InventoryContext();
+            inventoryContext.Projects.Remove(my_project);
+            context.SaveChanges();
+
+            return my_project;
+        }
     }
 }
