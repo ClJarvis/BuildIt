@@ -20,6 +20,8 @@ namespace BuildIt.DAL
                 new Inventory {FabricType="broadcloth", FabricColor="Red", FabricAmount=4, FabricUnit= "yds"}
             };
 
+            ////testing for a push
+
         /*    inventories.ForEach(i => context.Projects.Add(i));
             context.SaveChanges();
             var projects
