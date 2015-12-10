@@ -4,7 +4,7 @@
 
 ## Summary
 
-Track time and materials used to build costumes. Either to track for personal projects or to track a contracted build for a client. This will be a CRUD app built with C#, CSS, HTML5, and AngularJS. 
+Track time and materials used to build costumes. Either to track for personal projects or to track a contracted build for a client. This will be a CRUD app built with C#, CSS, HTML5, Json, and AngularJS. 
 
 ## Basic Features
 
