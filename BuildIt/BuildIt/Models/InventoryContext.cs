@@ -7,11 +7,12 @@ using System.Data.Entity;
 
 namespace BuildIt.Models
 {
-    
-        public class InventoryContext :ApplicationDbContext
-        {
-         public virtual IDbSet<Inventory> Inventories { get; set; }
-         public virtual IDbSet<Project> Projects { get; set; }
+
+    public class InventoryContext : ApplicationDbContext
+    {
+        public virtual IDbSet<Inventory> Inventories { get; set; }
+        public virtual IDbSet<Project> Projects { get; set; }
+        public virtual IDbSet<ProjectInventory> ProjectInventories {get; set;} //jointable
 
         public static implicit operator InventoryContext(ProjectContext v)
         {
