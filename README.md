@@ -1,6 +1,6 @@
-# Build it
+# My Big Damn Project Tracker
 
-- Freelance project tracker
+- Freelance costumer. prop builder project tracker
 
 ## Summary
 

@@ -1,3 +1,4 @@
+C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\System.Web.WebPages.dll
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\roslyn\csc.exe
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -40,7 +41,6 @@ C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\System.Web.Mvc.dll
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\System.Web.Optimization.dll
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\System.Web.Razor.dll
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\System.Web.WebPages.Deployment.dll
-C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\System.Web.WebPages.dll
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\System.Web.WebPages.Razor.dll
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\WebGrease.dll
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
@@ -70,6 +70,6 @@ C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\Microsoft.Owin.Secur
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\obj\Debug\BuildIt.csprojResolveAssemblyReference.cache
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\obj\Debug\BuildIt.dll
 C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\obj\Debug\BuildIt.pdb
+C:\Users\chris\Documents\GitHub\BuildIt\BuildIt\BuildIt\obj\Debug\BuildIt.csprojResolveAssemblyReference.cache
