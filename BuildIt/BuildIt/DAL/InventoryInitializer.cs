@@ -22,13 +22,15 @@ namespace BuildIt.DAL
 
             ////testing for a push
 
-        /*    inventories.ForEach(i => context.Projects.Add(i));
-            context.SaveChanges();
-            var projects
-            {
-            new Project {FabricType="broadcloth", FabricColor="Dark Brown", FabricAmount=6, FabricUnit= "yds"},
-             
-            }; */
+            /*    inventories.ForEach(i => context.Projects.Add(i));
+                context.SaveChanges();
+                var projects = new List<Project>  
+                {
+                new Project {FabricType="broadcloth", FabricColor="Dark Brown", FabricAmount=6, FabricUnit= "yds"},
+                new Project {FabricType="broadcloth", FabricColor="Dark Brown", FabricAmount=6, FabricUnit= "yds"},
+                new Project {FabricType="broadcloth", FabricColor="Dark Brown", FabricAmount=6, FabricUnit= "yds"},
+
+                }; */
 
 
             ///projectInventories
