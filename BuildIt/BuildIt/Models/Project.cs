@@ -15,14 +15,8 @@ namespace BuildIt.Models
         public ApplicationUser Owner { get; set; }
         public DateTime StartDate { get; set; }
         public List<Inventory> ProjectItems { get; set; }
-        private ProjectContext context;
 
-
-        public Project()
-        {
-            context = new ProjectContext();
-            // Project Project = new List<Project>();
-        }
+        public Project() { }
 
         public Project(string title)
         {

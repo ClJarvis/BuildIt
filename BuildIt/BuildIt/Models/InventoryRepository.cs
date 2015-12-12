@@ -71,7 +71,6 @@ namespace BuildIt.Models
         public Project DeleteProject()
         {
             Project my_project = removed_project;
-            context = new ProjectContext();
             // Project Project = new List<Project>();
             return my_project;
         }
