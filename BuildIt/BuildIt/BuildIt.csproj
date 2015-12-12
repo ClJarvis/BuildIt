@@ -183,12 +183,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoriesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-<<<<<<< HEAD
-
-=======
     <Compile Include="Controllers\ProjectInventoriesController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
->>>>>>> Views
     <Compile Include="DAL\InventoryContext.cs" />
     <Compile Include="DAL\InventoryInitializer.cs" />
     <Compile Include="Global.asax.cs">

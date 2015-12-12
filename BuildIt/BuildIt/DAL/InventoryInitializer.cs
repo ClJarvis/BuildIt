@@ -14,7 +14,7 @@ namespace BuildIt.DAL
             //base.Seed(context);  // autoimplmented
             var inventories = new List<Inventory> //items ??
             {
-                //rename to Item ??
+ 
                 new Inventory {FabricType="broadcloth", FabricColor="Dark Brown", FabricAmount=6, FabricUnit= "yds"},
                 new Inventory {FabricType="linen", FabricColor="Light Brown", FabricAmount=8, FabricUnit= "yds"},
                 new Inventory {FabricType="Chessecloth", FabricColor="Tan", FabricAmount=2, FabricUnit= "yds"},
@@ -44,6 +44,19 @@ namespace BuildIt.DAL
             projectInventories.ForEach(x => context.ProjectInventories.Add(x));
             context.SaveChanges();
            
+
+            /*    inventories.ForEach(i => context.Projects.Add(i));
+                context.SaveChanges();
+                var projects
+                {
+                new Project {FabricType="broadcloth", FabricColor="Dark Brown", FabricAmount=6, FabricUnit= "yds"},
+
+                }; */
+
+
+            ///projectInventories
+            /// 
+
         }
     }
 }
