@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BuildIt.Models;
 using System.Collections.Generic;
+using BuildIt.DAL;
 
 
 namespace BuildIt.Tests
