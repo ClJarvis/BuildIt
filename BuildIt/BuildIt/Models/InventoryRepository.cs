@@ -5,6 +5,7 @@ using System.Web;
 using System.Data.Entity;
 using BuildIt.Models;
 using System.ComponentModel.DataAnnotations;
+using BuildIt.DAL;
 
 namespace BuildIt.Models
 {
