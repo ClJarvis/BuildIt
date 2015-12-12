@@ -14,8 +14,13 @@ namespace BuildIt.DAL
         //internal object ProjectInventories;
 
         public virtual IDbSet<Inventory> Inventories { get; set; }
-         public virtual IDbSet<Project> Projects { get; set; }
+        public virtual IDbSet<Project> Projects { get; set; }
         public virtual IDbSet<ProjectInventory> ProjectInventories { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
-    
+   
 }

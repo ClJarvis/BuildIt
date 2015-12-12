@@ -2,114 +2,127 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
-using BuildIt.Models;
+using System.Web;
+using System.Web.Mvc;
 using BuildIt.DAL;
+using BuildIt.Models;
 
 namespace BuildIt.Controllers
 {
-    public class ProjectsController : ApiController
+    public class ProjectsController : Controller
     {
-        private InventoryContext context = new InventoryContext();
+        private InventoryContext db = new InventoryContext();
 
-        // GET: api/Projects
-        public IQueryable<Project> GetProjects()
+        // GET: Projects
+        public ActionResult Index()
         {
-            return context.Projects;
+            return View(db.Projects.ToList());
         }
 
-        // GET: api/Projects/5
-        [ResponseType(typeof(Project))]
-        public IHttpActionResult GetProject(int id)
+        // GET: Projects/Details/5
+        public ActionResult Details(int? id)
         {
-            Project project = context.Projects.Find(id);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Project project = db.Projects.Find(id);
             if (project == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
-
-            return Ok(project);
+            return View(project);
         }
 
-        // PUT: api/Projects/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutProject(Project project)
+        // GET: Projects/Create
+        public ActionResult Create()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            context.Entry(project).State = System.Data.Entity.EntityState.Modified;
-           
-
-            try
-            {
-                context.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProjectExists(project.ProjectId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            return View();
         }
 
-        // POST: api/Projects
-        [ResponseType(typeof(Project))]
-        public IHttpActionResult PostProject(Project project)
+        // POST: Projects/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "ProjectId,ProjectName,StartDate")] Project project)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                db.Projects.Add(project);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            context.Projects.Add(project);
-            context.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = project.ProjectId }, project);
+            return View(project);
         }
 
-        // DELETE: api/Projects/5
-        [ResponseType(typeof(Project))]
-        public IHttpActionResult DeleteProject(int id)
+        // GET: Projects/Edit/5
+        public ActionResult Edit(int? id)
         {
-            Project project = context.Projects.Find(id);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Project project = db.Projects.Find(id);
             if (project == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
+            return View(project);
+        }
 
-            context.Projects.Remove(project);
-            context.SaveChanges();
+        // POST: Projects/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ProjectId,ProjectName,StartDate")] Project project)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(project).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(project);
+        }
 
-            return Ok(project);
+        // GET: Projects/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Project project = db.Projects.Find(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+            return View(project);
+        }
+
+        // POST: Projects/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Project project = db.Projects.Find(id);
+            db.Projects.Remove(project);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                context.Dispose();
+                db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool ProjectExists(int id)
-        {
-            return context.Projects.Count(e => e.ProjectId == id) > 0;
         }
     }
 }

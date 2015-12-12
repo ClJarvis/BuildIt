@@ -2,113 +2,127 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
-using BuildIt.Models;
+using System.Web;
+using System.Web.Mvc;
 using BuildIt.DAL;
+using BuildIt.Models;
 
 namespace BuildIt.Controllers
 {
-    public class InventoriesController : ApiController
+    public class InventoriesController : Controller
     {
-        private InventoryContext context = new InventoryContext();
+        private InventoryContext db = new InventoryContext();
 
-        // GET: api/Inventories
-        public IQueryable<Inventory> GetInventories()
+        // GET: Inventories
+        public ActionResult Index()
         {
-            return context.Inventories;
+            return View(db.Inventories.ToList());
         }
 
-        // GET: api/Inventories/5
-        [ResponseType(typeof(Inventory))]
-        public IHttpActionResult GetInventory(int id)
+        // GET: Inventories/Details/5
+        public ActionResult Details(int? id)
         {
-            Inventory inventory = context.Inventories.Find(id);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Inventory inventory = db.Inventories.Find(id);
             if (inventory == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
-
-            return Ok(inventory);
+            return View(inventory);
         }
 
-        // PUT: api/Inventories/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutInventory(Inventory inventory)
+        // GET: Inventories/Create
+        public ActionResult Create()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            context.Entry(inventory).State = System.Data.Entity.EntityState.Modified;
-
-            try
-            {
-                context.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!InventoryExists(inventory.InventoryID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            return View();
         }
 
-        // POST: api/Inventories
-        [ResponseType(typeof(Inventory))]
-        public IHttpActionResult PostInventory(Inventory inventory)
+        // POST: Inventories/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "InventoryID,Title,FabricType,FabricColor,FabricAmount,FabricUnit")] Inventory inventory)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                db.Inventories.Add(inventory);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            context.Inventories.Add(inventory);
-            context.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = inventory.InventoryID }, inventory);
+            return View(inventory);
         }
 
-        // DELETE: api/Inventories/5
-        [ResponseType(typeof(Inventory))]
-        public IHttpActionResult DeleteInventory(int id)
+        // GET: Inventories/Edit/5
+        public ActionResult Edit(int? id)
         {
-            Inventory inventory = context.Inventories.Find(id);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Inventory inventory = db.Inventories.Find(id);
             if (inventory == null)
             {
-                return NotFound();
+                return HttpNotFound();
             }
+            return View(inventory);
+        }
 
-            context.Inventories.Remove(inventory);
-            context.SaveChanges();
+        // POST: Inventories/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "InventoryID,Title,FabricType,FabricColor,FabricAmount,FabricUnit")] Inventory inventory)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(inventory).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(inventory);
+        }
 
-            return Ok(inventory);
+        // GET: Inventories/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Inventory inventory = db.Inventories.Find(id);
+            if (inventory == null)
+            {
+                return HttpNotFound();
+            }
+            return View(inventory);
+        }
+
+        // POST: Inventories/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Inventory inventory = db.Inventories.Find(id);
+            db.Inventories.Remove(inventory);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                context.Dispose();
+                db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool InventoryExists(int id)
-        {
-            return context.Inventories.Count(e => e.InventoryID == id) > 0;
         }
     }
 }

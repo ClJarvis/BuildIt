@@ -123,11 +123,14 @@ namespace BuildIt.Tests
         {
             //Begin Arrange
             var data = my_projects.AsQueryable();
+
             string ProjectName = "My Inventory";
+            
             
            // InventoryRepository repo = new InventoryRepository(mock_context.Object);
             Project project = new Project { ProjectName = "ToDo", ProjectId = 1 };
-            my_projects.Remove(new Project { ProjectName = "My Current Project", Owner = user1});
+            my_projects.Add(project);
+          //  my_projects.Remove(new Project { ProjectName = "My Current Project", Owner = user1});
 
             mock_Projects.As<IQueryable<Project>>().Setup(m => m.Provider).Returns(data.Provider);
             mock_Projects.As<IQueryable<Project>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
@@ -145,13 +148,14 @@ namespace BuildIt.Tests
             //Begin Act
 
            // Project removed_project = repo.CreateProject("My Material Inventory", owner);
-            Project removed_project = repo.DeleteProject("project", owner);
+            Project removed_project = repo.DeleteProject("ToDo", owner);
             Project mock_project = new Project();
             //End Act
+
             //Begin Assert
-            Assert.IsNotNull(removed_project);
+            Assert.IsNotNull(project);
             mock_Projects.Verify(m => m.Add(It.IsAny<Project>()));   
-            mock_context.Verify(x => x.SaveChanges(), Times.Once());
+            mock_context.Verify(x => x.SaveChanges(), Times.Exactly(2));
             Assert.AreEqual(1, repo.GetProjectCount());
             repo.DeleteProject(removed_project);
             mock_Projects.Verify(x => x.Remove(It.IsAny<Project>()));

@@ -83,8 +83,11 @@ namespace BuildIt.Models
 
         public Project DeleteProject(string v, ApplicationUser owner)
         {
-           // Project my_project = removed_project;
-          //  InventoryContext inventoryContext = new InventoryContext();
+            // Project my_project = removed_project;
+            //  InventoryContext inventoryContext = new InventoryContext();
+            Project foundProject = null;
+            var query = from i in context.Projects select i;
+            return foundProject;
             context.Projects.Remove(removed_project);
             context.SaveChanges();
 

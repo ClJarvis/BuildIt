@@ -1,0 +1,59 @@
+﻿@model BuildIt.Models.Inventory
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Inventory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FabricType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FabricType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FabricColor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FabricColor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FabricAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FabricAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FabricUnit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FabricUnit)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.InventoryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
