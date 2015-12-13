@@ -63,6 +63,8 @@ namespace BuildIt.Models
         {
             Project my_project = removed_project;
             InventoryContext inventoryContext = new InventoryContext();
+            Project foundProject = null;
+            var query = from i in context.Projects select i;
             inventoryContext.Projects.Remove(my_project);
             context.SaveChanges();
 
@@ -88,10 +90,10 @@ namespace BuildIt.Models
             Project foundProject = null;
             var query = from i in context.Projects select i;
             return foundProject;
-            context.Projects.Remove(removed_project);
+            context.Projects.Remove(foundProject);
             context.SaveChanges();
 
-            return removed_project;
+            return foundProject;
         }
     }
 }
