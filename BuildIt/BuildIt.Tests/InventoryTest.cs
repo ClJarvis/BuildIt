@@ -179,31 +179,35 @@ namespace BuildIt.Tests
             mock_Inventories.As<IQueryable<Inventory>>().Setup(m => m.Expression).Returns(data.Expression);
 
             mock_Inventories.Setup(m => m.Add(It.IsAny<Inventory>())).Callback((Inventory p) => my_inventories.Add(p));
-            mock_Inventories.Setup(m => m.Remove(It.IsAny<Inventory>())).Callback((Inventory p) => my_inventories.Remove(p));
+           
             mock_context.Setup(m => m.Inventories).Returns(mock_Inventories.Object);
+
+            string invetoriesTitle = "my fabric Inventory";
             //End Arrange
 
             //Begin Act
 
-            Inventory removed_project = repo.CreateInventory("My Inventory", owner);
+        // Inventory removed_project = repo.UpdateInventory("My Inventory");
+            Inventory inventoriesTitle = new Inventory() { Title = "My fabric items" };
+           
+            my_inventories.Add(inventoriesTitle);
+
+            Project projects = new Project() { ProjectName = "My new project" };
+            List<Project> project = new List<Project>();
+            project.Add(projects);
+
 
             Project Updatedproject = new Project { ProjectName = "ToDo", ProjectId = 1 };
-            my_projects.Add(new Project { ProjectName = "My Next Board", Owner = user1, ProjectId = 1 });
+            // my_projects.Add(new Project { ProjectName = "My Next Board", Owner = user1, ProjectId = 1 });
+            string updatedProjectName = "I changed my projectName";
+           
+            repo.UpdateInventory(Project.ProjectName);
+
             //End Act
 
             //Begin Assert
-            Assert.IsNotNull(removed_project);
-            mock_Inventories.Verify(m => m.Add(It.IsAny<Inventory>()));
-            mock_context.Verify(x => x.SaveChanges(), Times.Once());
            
-            
-            //mock_Inventories.Verify(x => x.Remove(It.IsAny<Inventory>()));
-            mock_context.Verify(x => x.SaveChanges(), Times.Once());
-            Assert.AreEqual(0, repo.GetInventoryCount());
-            string expected = my_projects.ToString();
-            string actual = "my new project";
-          
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(my_projects.ProjectName, projects.ProjectName);
             //End Assert
         }
 

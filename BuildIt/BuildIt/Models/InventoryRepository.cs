@@ -89,11 +89,20 @@ namespace BuildIt.Models
             //  InventoryContext inventoryContext = new InventoryContext();
             Project foundProject = null;
             var query = from i in context.Inventories select i;
-            return foundProject;
+           // return foundProject;
             context.Projects.Remove(foundProject);
             context.SaveChanges();
 
             return foundProject;
+        }
+
+        public Inventory UpdateInventory(string title)
+        {
+            var query = context.Inventories.Where(i => i.Title == title);
+            var result = query.First();
+
+            context.SaveChanges();
+            return result;
         }
     }
 }
