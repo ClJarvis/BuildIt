@@ -74,7 +74,7 @@ namespace BuildIt.Models
         public Project DeleteProject()
         {
             Project my_project = removed_project;
-            // Project Project = new List<Project>();
+            // Project Project = new List<Project>(); 
             return my_project;
         }
 
@@ -88,7 +88,7 @@ namespace BuildIt.Models
             // Project my_project = removed_project;
             //  InventoryContext inventoryContext = new InventoryContext();
             Project foundProject = null;
-            var query = from i in context.Projects select i;
+            var query = from i in context.Inventories select i;
             return foundProject;
             context.Projects.Remove(foundProject);
             context.SaveChanges();

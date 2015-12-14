@@ -132,7 +132,7 @@ namespace BuildIt.Tests
             my_projects.Add(project);
           //  my_projects.Remove(new Project { ProjectName = "My Current Project", Owner = user1});
 
-            mock_Projects.As<IQueryable<Project>>().Setup(m => m.Provider).Returns(data.Provider);
+            mock_Projects.As<IQueryable<Inventory>>().Setup(m => m.Provider).Returns(data.Provider);
             mock_Projects.As<IQueryable<Project>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
             mock_Projects.As<IQueryable<Project>>().Setup(m => m.ElementType).Returns(data.ElementType);
             mock_Projects.As<IQueryable<Project>>().Setup(m => m.Expression).Returns(data.Expression);
