@@ -128,11 +128,11 @@ namespace BuildIt.Tests
             
             
            // InventoryRepository repo = new InventoryRepository(mock_context.Object);
-            Project project = new Project { ProjectName = "ToDo", ProjectId = 1 };
-            my_projects.Add(project);
+            //Project project = new Project { ProjectName = "ToDo", ProjectId = 1 };
+           // my_projects.Add(project);
           //  my_projects.Remove(new Project { ProjectName = "My Current Project", Owner = user1});
 
-            mock_Projects.As<IQueryable<Inventory>>().Setup(m => m.Provider).Returns(data.Provider);
+            mock_Projects.As<IQueryable<Project>>().Setup(m => m.Provider).Returns(data.Provider);
             mock_Projects.As<IQueryable<Project>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
             mock_Projects.As<IQueryable<Project>>().Setup(m => m.ElementType).Returns(data.ElementType);
             mock_Projects.As<IQueryable<Project>>().Setup(m => m.Expression).Returns(data.Expression);
@@ -145,21 +145,22 @@ namespace BuildIt.Tests
             InventoryRepository repo = new InventoryRepository(mock_context.Object);
             //End Arrange
 
-            //Begin Act
+            //Begin First Act
+            Project NewProject = repo.CreateProject("ToDo", owner);
 
-           // Project removed_project = repo.CreateProject("My Material Inventory", owner);
-            Project removed_project = repo.DeleteProject("ToDo", owner);
-            Project mock_project = new Project();
-            //End Act
-
-            //Begin Assert
-            Assert.IsNotNull(project);
-            mock_Inventories.Verify(m => m.Add(It.IsAny<Inventory>()));   
-            mock_context.Verify(x => x.SaveChanges(), Times.Exactly(2));
+            // Begin first assert
+            Assert.IsNotNull(NewProject);
             Assert.AreEqual(1, repo.GetProjectCount());
+
+            // Begin second act
+            Project removed_project = repo.DeleteProject("ToDo", owner);
+
+            //Begin second Assert
+            mock_Projects.Verify(m => m.Add(It.IsAny<Project>()));   
+            mock_context.Verify(x => x.SaveChanges(), Times.Exactly(2)); 
             repo.DeleteProject(removed_project);
             mock_Projects.Verify(x => x.Remove(It.IsAny<Project>()));
-            mock_context.Verify(x => x.SaveChanges(), Times.Exactly(2));
+            mock_context.Verify(x => x.SaveChanges(), Times.Exactly(3));
             Assert.AreEqual(0, repo.GetProjectCount());
             //End Assert    
         }
@@ -173,10 +174,10 @@ namespace BuildIt.Tests
             Project list = new Project { ProjectName = "ToDo", ProjectId = 1 };
             my_projects.Remove(new Project { ProjectName = "My First Project", Owner = user1, ProjectId = 1 });
 
-            mock_Inventories.As<IQueryable<Inventory>>().Setup(m => m.Provider).Returns(data.Provider);
+            mock_Inventories.As<IQueryable<Project>>().Setup(m => m.Provider).Returns(data.Provider);
             mock_Inventories.As<IQueryable<Project>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-            mock_Inventories.As<IQueryable<Inventory>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mock_Inventories.As<IQueryable<Inventory>>().Setup(m => m.Expression).Returns(data.Expression);
+            mock_Inventories.As<IQueryable<Project>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mock_Inventories.As<IQueryable<Project>>().Setup(m => m.Expression).Returns(data.Expression);
 
             mock_Inventories.Setup(m => m.Add(It.IsAny<Inventory>())).Callback((Inventory p) => my_inventories.Add(p));
            
@@ -201,13 +202,13 @@ namespace BuildIt.Tests
             // my_projects.Add(new Project { ProjectName = "My Next Board", Owner = user1, ProjectId = 1 });
             string updatedProjectName = "I changed my projectName";
            
-            repo.UpdateInventory(Project.ProjectName);
+            repo.UpdateInventory(Updatedproject.ProjectName);
 
             //End Act
 
             //Begin Assert
            
-            Assert.AreEqual(my_projects.ProjectName, projects.ProjectName);
+            Assert.AreEqual(Updatedproject.ProjectName, projects.ProjectName);
             //End Assert
         }
 
