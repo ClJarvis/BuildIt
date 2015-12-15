@@ -55,8 +55,9 @@ namespace BuildIt.Models
             Project my_Project = new Project { ProjectName = projectName, Owner = owner };
             context.Projects.Add(my_Project);
             context.SaveChanges();
+            var newProject = (from p in context.Projects where p.ProjectName == projectName select p).First();
 
-            return my_Project;
+            return newProject;
         }
         
         public void DeleteProject(Project removed_project)
@@ -79,7 +80,7 @@ namespace BuildIt.Models
 
         public Project DeleteProject(string v, ApplicationUser owner)
         {
-            // Project my_project = removed_project;
+            Project my_project = removed_project;
             //  InventoryContext inventoryContext = new InventoryContext();
             Project foundProject;
             var query = from p in context.Projects where p.ProjectName == v select p;
@@ -91,19 +92,31 @@ namespace BuildIt.Models
             return foundProject;
         }
 
+        public Project GetProjectById(int id)
+        {
+            var project = (from p in context.Projects where p.ProjectId == id select p).First();
+            return project;
+        }
+
+
+        public void UpdateProject(Project updatedProject)
+        {
+          
+         
+            var query = (from p in context.Projects
+                         where p.ProjectId == updatedProject.ProjectId
+                         select p);
+            var projectToUpdate = query.First();
+            projectToUpdate.ProjectName = updatedProject.ProjectName;
+            projectToUpdate.ProjectItems = updatedProject.ProjectItems;
+            projectToUpdate.StartDate = updatedProject.StartDate;
+            context.SaveChanges();
+        }
+
+
         public Inventory UpdateInventory(string title)
         {
             var query = context.Inventories.Where(i => i.Title == title);
-            var result = query.First();
-
-            context.SaveChanges();
-            return result;
-        }
-
-        public Project UpdatedProject(string projectName)
-        {
-            
-            var query = context.Projects.Where(p => p.ProjectName == projectName);
             var result = query.First();
 
             context.SaveChanges();

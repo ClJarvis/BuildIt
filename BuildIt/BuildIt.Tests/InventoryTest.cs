@@ -126,12 +126,6 @@ namespace BuildIt.Tests
 
             string ProjectName = "ToDo";
             
-            
-           // InventoryRepository repo = new InventoryRepository(mock_context.Object);
-            //Project project = new Project { ProjectName = "ToDo", ProjectId = 1 };
-           // my_projects.Add(project);
-          //  my_projects.Remove(new Project { ProjectName = "My Current Project", Owner = user1});
-
             mock_Projects.As<IQueryable<Project>>().Setup(m => m.Provider).Returns(data.Provider);
             mock_Projects.As<IQueryable<Project>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
             mock_Projects.As<IQueryable<Project>>().Setup(m => m.ElementType).Returns(data.ElementType);
@@ -170,45 +164,42 @@ namespace BuildIt.Tests
         {
             //Begin Arrange
             var data = my_projects.AsQueryable();
-            InventoryRepository repo = new InventoryRepository(mock_context.Object);
-            Project list = new Project { ProjectName = "ToDo", ProjectId = 1 };
-            my_projects.Remove(new Project { ProjectName = "My First Project", Owner = user1, ProjectId = 1 });
+           // InventoryRepository repo = new InventoryRepository(mock_context.Object);
+           // Project list = new Project { ProjectName = "ToDo", ProjectId = 1 };
+           // my_projects.Remove(new Project { ProjectName = "My First Project", Owner = user1, ProjectId = 1 });
 
-            mock_Inventories.As<IQueryable<Project>>().Setup(m => m.Provider).Returns(data.Provider);
-            mock_Inventories.As<IQueryable<Project>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-            mock_Inventories.As<IQueryable<Project>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            mock_Inventories.As<IQueryable<Project>>().Setup(m => m.Expression).Returns(data.Expression);
+            mock_Projects.As<IQueryable<Project>>().Setup(m => m.Provider).Returns(data.Provider);
+            mock_Projects.As<IQueryable<Project>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mock_Projects.As<IQueryable<Project>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mock_Projects.As<IQueryable<Project>>().Setup(m => m.Expression).Returns(data.Expression);
 
-            mock_Inventories.Setup(m => m.Add(It.IsAny<Inventory>())).Callback((Inventory p) => my_inventories.Add(p));
+            mock_Projects.Setup(m => m.Add(It.IsAny<Project>())).Callback((Project p) => my_projects.Add(p));
            
-            mock_context.Setup(m => m.Inventories).Returns(mock_Inventories.Object);
+            mock_context.Setup(m => m.Projects).Returns(mock_Projects.Object);
 
-            string invetoriesTitle = "my fabric Inventory";
+            InventoryRepository repo = new InventoryRepository(mock_context.Object);
+
+
             //End Arrange
 
+            Project projectToChange = repo.CreateProject("ToDo", owner);
             //Begin Act
 
-        // Inventory removed_project = repo.UpdateInventory("My Inventory");
-            Inventory inventoriesTitle = new Inventory() { Title = "My fabric items" };
-           
-            my_inventories.Add(inventoriesTitle);
+            // Begin Assert
+            Assert.IsNotNull(projectToChange);
+            Assert.AreEqual(1, repo.GetProjectCount());
 
-            Project projects = new Project() { ProjectName = "My new project" };
-            List<Project> project = new List<Project>();
-            project.Add(projects);
-
-
-            Project Updatedproject = new Project { ProjectName = "ToDo", ProjectId = 1 };
+            projectToChange.ProjectName = "blah blah";
             // my_projects.Add(new Project { ProjectName = "My Next Board", Owner = user1, ProjectId = 1 });
-            string updatedProjectName = "I changed my projectName";
            
-            repo.UpdateInventory(Updatedproject.ProjectName);
+            repo.UpdateProject(projectToChange);
 
             //End Act
 
             //Begin Assert
+            var updatedProject = repo.GetProjectById(projectToChange.ProjectId);
            
-            Assert.AreEqual(Updatedproject.ProjectName, projects.ProjectName);
+            Assert.AreEqual(updatedProject.ProjectName, "blah blah");
             //End Assert
         }
 

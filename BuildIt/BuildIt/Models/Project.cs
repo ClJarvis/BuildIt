@@ -33,14 +33,7 @@ namespace BuildIt.Models
 
         //public Project() { }
     }
-    ////pulled from inventory repo in attempt to fix error
-    /*public void DeleteProject(Project removed_project) 
-    {
-        Project my_project = removed_project;
-        context.Project.Remove(my_project);
-        context.SaveChanges();
-    }
-    */
+   
 
 
 }
