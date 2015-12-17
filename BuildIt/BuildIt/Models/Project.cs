@@ -14,7 +14,8 @@ namespace BuildIt.Models
         // public int UserID { get; set; }
         public ApplicationUser Owner { get; set; }
         public DateTime StartDate { get; set; }
-        public List<Inventory> ProjectItems { get; set; }
+       
+        public virtual ICollection<ProjectInventory> ProjectInventories { get; set; }
 
         public Project() { }
 

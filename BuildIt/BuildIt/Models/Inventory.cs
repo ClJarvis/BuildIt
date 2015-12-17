@@ -19,9 +19,10 @@ namespace BuildIt.Models
         public String FabricColor { get; set; }
         public int FabricAmount { get; set; }
         public String FabricUnit { get; set; }
+        public virtual ICollection<ProjectInventory> ProjectInventories{ get; set; }
 
        
-        public virtual object Project { get; set; }
+        
 
         public Inventory(string title)
         {
@@ -38,4 +39,6 @@ namespace BuildIt.Models
 
         public Inventory() { }
     }
+
+       
 }

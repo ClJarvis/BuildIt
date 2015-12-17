@@ -108,7 +108,7 @@ namespace BuildIt.Models
                          select p);
             var projectToUpdate = query.First();
             projectToUpdate.ProjectName = updatedProject.ProjectName;
-            projectToUpdate.ProjectItems = updatedProject.ProjectItems;
+            projectToUpdate.ProjectInventories = updatedProject.ProjectInventories;
             projectToUpdate.StartDate = updatedProject.StartDate;
             context.SaveChanges();
         }
