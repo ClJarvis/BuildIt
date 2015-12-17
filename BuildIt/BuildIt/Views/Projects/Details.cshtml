@@ -43,19 +43,20 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.ProjectId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
-<ul id="AllInventories"></ul>
-<script>
-    function httpGetAsync(theUrl, callback) {
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function () {
-            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-                callback(xmlHttp.responseText);
-        }
-        xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-        xmlHttp.send(null);
-    }
 
-    httpGetAsync('/api/projectInventories', function (data) {
-        console.log(data);
-    });
-</script>
+
+<h2>All Inventories</h2>
+<ul id="AllInventories">
+    @foreach (var item in ViewBag.Inventories)
+    {
+        //form POST method, make action point to a end point on projectsInventoy controller 
+        //pass Model.Projectid and Id of current inventoryItem 
+        //form element 2 input type buttons add/delete
+        //mikedoenetting.com
+        <input type="submit" name="add" value="add" />
+        <input type="button" name="delete" value="delete" />
+         <li>
+            @item.Title
+        </li>
+    }
+</ul>
