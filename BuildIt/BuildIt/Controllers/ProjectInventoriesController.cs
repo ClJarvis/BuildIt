@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using BuildIt.Models;
 using BuildIt.DAL;
+using Newtonsoft.Json;
 
 namespace BuildIt.Controllers
 {
@@ -18,9 +19,10 @@ namespace BuildIt.Controllers
         private InventoryContext context = new InventoryContext();
 
         // GET: api/ProjectInventories
-        public IQueryable<ProjectInventory> GetProjectInventories()
+        public string GetProjectInventories()
         {
-            return context.ProjectInventories;
+            var list = context.ProjectInventories;
+            return JsonConvert.SerializeObject(list);
         }
 
         // GET: api/ProjectInventories/5
