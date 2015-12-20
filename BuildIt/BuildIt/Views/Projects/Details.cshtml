@@ -47,7 +47,7 @@
 
 <h2>All Inventories</h2>
 
-   <ul id="AllInventories">
+  <ul id="AllInventories">
     @foreach (var item in ViewBag.Inventories)
     {
         // form POST method, make action point to a end point on projectsInventoy controller
@@ -62,17 +62,17 @@
                 @item.Title
                 @item.FabricType
                 @item.FabricUnit
-                <input type="submit" name="add" value="add to project" onclick="hello(value);">
+                <input type="submit" name="add" value="add to project">
                 <!---- <button class="btn btn-info" name="delete" value="delete"  onclick="" Function()"ProjectInventorires.GetProjectInventories"/></button> -->
             </form>
         </li>
     
     }
-</ul>
+ </ul>
 
-        <script type="text/javascript">
+    <!---    <script type="text/javascript">
             function hello(Value) {
             alert(value);
          }
-        </script>
+        </script> -->
     
