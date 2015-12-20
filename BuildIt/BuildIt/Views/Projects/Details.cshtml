@@ -46,18 +46,33 @@
 
 
 <h2>All Inventories</h2>
-<ul id="AllInventories">
+
+   <ul id="AllInventories">
     @foreach (var item in ViewBag.Inventories)
     {
-        //form POST method, make action point to a end point on projectsInventoy controller 
-        //pass Model.Projectid and Id of current inventoryItem 
-        //form element 2 input type buttons add/delete
+        // form POST method, make action point to a end point on projectsInventoy controller
+        //pass Model.Projectid and Id of current inventoryItem
+        // form element 2 input type buttons add/delete
         //mikedoenetting.com
-        <input type="submit" name="add" value="add" />
-        <input type="submit" ng-click="hello" delete" value="delete" />
-         <li>
-            @item.Title
-            @item.FabricType
+        <!--div style display:none id="ITEMID=breelolistid"-->
+
+        <li>
+            <form>
+                @Html.Hidden("inventory-id", ViewBag.InventoryId as object)
+                @item.Title
+                @item.FabricType
+                @item.FabricUnit
+                <input type="submit" name="add" value="add to project" onclick="hello(value);">
+                <!---- <button class="btn btn-info" name="delete" value="delete"  onclick="" Function()"ProjectInventorires.GetProjectInventories"/></button> -->
+            </form>
         </li>
+    
     }
 </ul>
+
+        <script type="text/javascript">
+            function hello(Value) {
+            alert(value);
+         }
+        </script>
+    
