@@ -57,8 +57,8 @@
         <!--div style display:none id="ITEMID=breelolistid"-->
 
         <li>
-            <form>
-                @Html.Hidden("inventory-id", ViewBag.InventoryId as object)
+            <form action="/api/ProjectInventories" >
+                @Html.Hidden("inventory-id", ViewBag.InventoryId as object) 
                 @item.Title
                 @item.FabricType
                 @item.FabricUnit

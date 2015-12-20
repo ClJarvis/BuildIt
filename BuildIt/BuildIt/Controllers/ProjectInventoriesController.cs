@@ -25,6 +25,8 @@ namespace BuildIt.Controllers
             return JsonConvert.SerializeObject(list);
         }
 
+        
+
         // GET: api/ProjectInventories/5
         [ResponseType(typeof(ProjectInventory))]
         public IHttpActionResult GetProjectInventory(int id)
