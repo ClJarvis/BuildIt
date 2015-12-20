@@ -58,10 +58,18 @@
 
         <li>
             <form action="/api/ProjectInventories" >
+                @using (Html.BeginForm("Index", "ProjectsInventoryController"))
+                {
+                    <p>
+                       
+                        <input type="submit" "GetProjectInventories" />
+                    </p>
+
                 @Html.Hidden("inventory-id", ViewBag.InventoryId as object) 
                 @item.Title
                 @item.FabricType
                 @item.FabricUnit
+                }
                 <input type="submit" name="add" value="add to project">
                 <!---- <button class="btn btn-info" name="delete" value="delete"  onclick="" Function()"ProjectInventorires.GetProjectInventories"/></button> -->
             </form>
