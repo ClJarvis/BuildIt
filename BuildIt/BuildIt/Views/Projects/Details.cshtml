@@ -57,13 +57,11 @@
         <!--div style display:none id="ITEMID=breelolistid"-->
 
         <li>
-            <form action="/api/ProjectInventories" >
-                @using (Html.BeginForm("Index", "ProjectsInventoryController"))
+            <!---form action="/api/ProjectInventories" -->
+                @using (Html.BeginForm("Index", "ProjectInventoriesController"))
                 {
-                    <p>
-                       
-                        <input type="submit" "GetProjectInventories" />
-                    </p>
+                      
+                <input type="submit" value="PostProjectInventory" />
 
                 @Html.Hidden("inventory-id", ViewBag.InventoryId as object) 
                 @item.Title
@@ -72,7 +70,7 @@
                 }
                 <input type="submit" name="add" value="add to project">
                 <!---- <button class="btn btn-info" name="delete" value="delete"  onclick="" Function()"ProjectInventorires.GetProjectInventories"/></button> -->
-            </form>
+            <!----/form -->
         </li>
     
     }
