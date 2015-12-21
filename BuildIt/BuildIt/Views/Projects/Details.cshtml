@@ -58,6 +58,7 @@
 
         <li>
             <!---form action="/api/ProjectInventories" -->
+         
                 @using (Html.BeginForm("Index", "ProjectInventoriesController"))
                 {
                       
@@ -68,7 +69,7 @@
                 @item.FabricType
                 @item.FabricUnit
                 }
-                <input type="submit" name="add" value="add to project">
+                <!--- input type="submit" name="add" value="add to project" /-->
                 <!---- <button class="btn btn-info" name="delete" value="delete"  onclick="" Function()"ProjectInventorires.GetProjectInventories"/></button> -->
             <!----/form -->
         </li>

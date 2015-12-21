@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Project List</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New Project", "Create")
 </p>
 <table class="table">
     <tr>
@@ -31,7 +31,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ProjectId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProjectId }) |
+            @Html.ActionLink("Add to Project", "Details", new { id=item.ProjectId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.ProjectId })
         </td>
     </tr>
