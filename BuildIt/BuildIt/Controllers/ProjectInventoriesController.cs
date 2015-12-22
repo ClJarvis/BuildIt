@@ -11,10 +11,12 @@ using System.Web.Http.Description;
 using BuildIt.Models;
 using BuildIt.DAL;
 using Newtonsoft.Json;
+using System.Web.Mvc;
+using System.Net.Http.Formatting;
 
 namespace BuildIt.Controllers
 {
-    public class ProjectInventoriesController : ApiController
+    public class ProjectInventoriesController : ApiController   //remove api controller 
     {
         private InventoryContext context = new InventoryContext();
 
@@ -27,7 +29,7 @@ namespace BuildIt.Controllers
 
         
 
-        // GET: api/ProjectInventories/5
+        // GET: ProjectInventories/5
         [ResponseType(typeof(ProjectInventory))]
         public IHttpActionResult GetProjectInventory(int id)
         {
@@ -71,18 +73,22 @@ namespace BuildIt.Controllers
         }
 
         // POST: api/ProjectInventories
-        [ResponseType(typeof(ProjectInventory))]
-        public IHttpActionResult PostProjectInventory(ProjectInventory projectInventory)
+        [System.Web.Mvc.HttpPost]
+        [System.Web.Http.Route("projectInventories/PostProjectInventory")]
+        public void PostProjectInventory(FormDataCollection data)
         {
-            if (!ModelState.IsValid)
+            int projectId = int.Parse(data.Get("ProjectId"));
+            int inventoryId = int.Parse(data.Get("InventoryId"));
+            Project project = context.Projects.Find(projectId);
+            Inventory inventory = context.Inventories.Find(inventoryId);
+            ProjectInventory projectInventory = new ProjectInventory
             {
-                return BadRequest(ModelState);
-            }
-
+                Project = project, Inventory = inventory, ProjectId = projectId, InventoryId = inventoryId
+            };
             context.ProjectInventories.Add(projectInventory);
             context.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = projectInventory.ProjectInventoryId }, projectInventory);
+            //return CreatedAtRoute("DefaultApi", new { id = projectInventory.ProjectInventoryId }, projectInventory);
         }
 
         // DELETE: api/ProjectInventories/5

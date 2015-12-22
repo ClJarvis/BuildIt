@@ -1,5 +1,5 @@
 ﻿@model BuildIt.Models.Project
-
+@using BuildIt.Models
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -58,17 +58,20 @@
 
         <li>
             <!---form action="/api/ProjectInventories" -->
-         
-                @using (Html.BeginForm("Index", "ProjectInventoriesController"))
-                {
-                      
-                <input type="submit" value="PostProjectInventory" />
+        
+                <!--using (Html.BeginForm("PostProjectInventory", "ProjectInventories"))-->
+                <form action="/ProjectInventories/PostProjectInventory" method="post">
 
-                @Html.Hidden("inventory-id", ViewBag.InventoryId as object) 
+                <input type="submit" value="Add to Project" /> <!--PostProjectInventory-->
+
+                @Html.Hidden("InventoryId", (item as Inventory).InventoryID) 
+                @Html.Hidden("ProjectId", Model.ProjectId)
+
+
                 @item.Title
                 @item.FabricType
                 @item.FabricUnit
-                }
+                </form>
                 <!--- input type="submit" name="add" value="add to project" /-->
                 <!---- <button class="btn btn-info" name="delete" value="delete"  onclick="" Function()"ProjectInventorires.GetProjectInventories"/></button> -->
             <!----/form -->
