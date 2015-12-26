@@ -5,29 +5,32 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Current Project Details</h2>
 
 <div>
     <h4>Project</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ProjectName)
+           <!---- at Html.DisplayNameFor(model => model.ProjectName) -->
+            Project Name
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ProjectName, "jhhjjhjh")
+            @Html.DisplayFor(model => model.ProjectName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
+            <!---- at Html.DisplayNameFor(model => model.StartDate) -->
+            Start Date
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.StartDate)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.ProjectInventories)
+            <!---- at Html.DisplayNameFor(model => model.ProjectInventories) -->
+            Project Inventory
         </dt>
         @for(var itemIndex=0; itemIndex < Model.ProjectInventories.Count(); itemIndex++ ) 
         {
@@ -45,7 +48,7 @@
 </p>
 
 
-<h2>All Inventories</h2>
+<h2>Material Inventory</h2>
 
   <ul id="AllInventories">
     @foreach (var item in ViewBag.Inventories)
