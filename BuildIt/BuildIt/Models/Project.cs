@@ -10,10 +10,13 @@ namespace BuildIt.Models
     {
         [Key]
         public int ProjectId { get; set; }
-        public string ProjectName { get; set; }
-        // public int UserID { get; set; }
+        [Display(Name = "Project Name")]
+        public string ProjectName { get; set; } 
+        //public int UserID { get; set; }
         public ApplicationUser Owner { get; set; }
+        [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
+
        
         public virtual ICollection<ProjectInventory> ProjectInventories { get; set; }
 
