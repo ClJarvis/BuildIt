@@ -37,6 +37,8 @@
     
         <dd>
             @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.Title)
+            @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricType)
+            @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricUnit)
         </dd>
         }    
         
