@@ -1,5 +1,5 @@
 ﻿body { 
-    background-color: cornflowerblue;
+    background-color: rgba(206,  105, 37, 1);
     color:aliceblue;
     align-content:center;
 }
@@ -11,4 +11,13 @@ a {
 
 li {
     list-style:none;
+}
+
+input, .btn-default {
+    background-color: rgba(224, 176, 54, 1);
+}
+
+.btn-default:hover {
+    background-color: rgba(224, 176, 99, 9);
+    color: yellow;
 }
