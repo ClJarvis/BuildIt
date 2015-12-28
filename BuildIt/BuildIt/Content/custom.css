@@ -15,9 +15,16 @@ li {
 
 input, .btn-default {
     background-color: rgba(224, 176, 54, 1);
+    border-color: black;
 }
 
 .btn-default:hover {
-    background-color: rgba(224, 176, 99, 9);
-    color: yellow;
+    background-color: rgba(164, 92, 11, 1);
+    color: white;
+    border-color: black;
 }
+
+.navbar {
+    background-color: black;
+    background: rgb(86,8, 8);
+} 
