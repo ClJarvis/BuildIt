@@ -36,8 +36,10 @@
         {
     
         <dd>
-            @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.Title)
+            <!--AT Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.Title)-->
             @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricType)
+            @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricColor)
+            @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricAmount)
             @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricUnit)
         </dd>
         }    
@@ -73,9 +75,11 @@
                 @Html.Hidden("ProjectId", Model.ProjectId)
 
 
-                @item.Title
+               <!--- at item.Title -->
                 @item.FabricType
+                @item.FabricColor
                 @item.FabricUnit
+                @item.FabricAmount
                 </form>
                 <!--- input type="submit" name="add" value="add to project" /-->
                 <!---- <button class="btn btn-info" name="delete" value="delete"  onclick="" Function()"ProjectInventorires.GetProjectInventories"/></button> -->
