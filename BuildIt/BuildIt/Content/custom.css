@@ -1,11 +1,11 @@
 ﻿body { 
-    background-color: rgba(206,  105, 37, 1);
-    color:aliceblue;
+    background-color: white;
+    color: #37474f;
     align-content:center;
 }
 
 a {
-  color: black;
+  color: #37474f;
 }
 
 
@@ -14,17 +14,21 @@ li {
 }
 
 input, .btn-default {
-    background-color: rgba(224, 176, 54, 1);
+    background-color: #90A4AE;
     border-color: black;
 }
 
 .btn-default:hover {
-    background-color: rgba(164, 92, 11, 1);
+    background-color: #455A64;
     color: white;
     border-color: black;
 }
 
 .navbar {
-    background-color: black;
-    background: rgb(86,8, 8);
+    color: white;
+    background: #607D8B;
 } 
+
+.navbar:link {
+    color:aquamarine;
+}
