@@ -13,7 +13,7 @@ namespace BuildIt.Models
         public int InventoryID { get; set; }
         //private InventoryContext context;
         public ApplicationUser Owner { get; set; }
-        [Display(Name ="Kind of Fabric")]
+        [Display(Name ="Title")]
         public string Title { get; set; }
         [Display(Name = "Kind of Fabric")]
         public String FabricType { get; set; }
