@@ -29,6 +29,6 @@ input, .btn-default {
     background: #607D8B;
 } 
 
-.navbar:link {
-    color:aquamarine;
+.navbar a{
+    color:red;
 }
