@@ -29,7 +29,7 @@ namespace BuildIt.DAL
 
               
                 {
-                new Project {ProjectId=0001, ProjectName="Dark Brown", /*Owner=6,*/ StartDate= DateTime.Now, /* datetime now? *ProjectItems= List<Inventory>*/},
+                new Project {/*InventoryId=0001,*/ ProjectId=0001, ProjectName="Dark Brown", /*Owner=6,*/ StartDate= DateTime.Now, /* datetime now? *ProjectItems= List<Inventory>*/},
                
 
                 };
