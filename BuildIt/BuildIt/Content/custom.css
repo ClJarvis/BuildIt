@@ -32,3 +32,10 @@ input, .btn-default {
 .navbar a{
     color:red;
 }
+
+#AllInventories {
+    background-color: #CFD8DC;
+    padding-top: 3px;
+    padding-bottom: 35px;
+    padding-left: 3px;
+}
