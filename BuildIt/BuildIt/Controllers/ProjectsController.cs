@@ -55,7 +55,7 @@ namespace BuildIt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "InventoryId,ProjectId,ProjectName,StartDate")] Project project)
+        public ActionResult Create([Bind(Include = "ProjectId,ProjectName,StartDate")] Project project)  ///InventoryId,
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +87,7 @@ namespace BuildIt.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "InventoryId,ProjectId,ProjectName,StartDate")] Project project)
+        public ActionResult Edit([Bind(Include = "ProjectId,ProjectName,StartDate")] Project project) /////////InventoryId,
         {
             if (ModelState.IsValid)
             {

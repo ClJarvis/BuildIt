@@ -9,7 +9,7 @@ namespace BuildIt.Models
     public class Project
     {
         [Key]
-        public int InventoryId { get; set; }
+     ////////   public int InventoryId { get; set; }
         public int ProjectId { get; set; }
         [Display(Name = "Project Name")]
         public string ProjectName { get; set; } 

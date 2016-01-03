@@ -11,6 +11,7 @@
     <h4>Project</h4>
     <hr />
     <dl class="dl-horizontal">
+
         <dt>
            <!---- at Html.DisplayNameFor(model => model.ProjectName) -->
             Project Name
@@ -51,50 +52,45 @@
     @Html.ActionLink("Back to List", "Index")
 </p>
 
+<div id="AllInventories">
+    <h2>Material Inventory</h2>
 
-<h2>Material Inventory</h2>
+      <ul >
+        @foreach (var item in ViewBag.Inventories)
+        {
+            // form POST method, make action point to a end point on projectsInventoy controller
+            //pass Model.Projectid and Id of current inventoryItem
+            // form element 2 input type buttons add/delete
+            //mikedoenetting.com
+            <!--div style display:none id="ITEMID=brellolistid"-->
 
-  <ul id="AllInventories">
-    @foreach (var item in ViewBag.Inventories)
-    {
-        // form POST method, make action point to a end point on projectsInventoy controller
-        //pass Model.Projectid and Id of current inventoryItem
-        // form element 2 input type buttons add/delete
-        //mikedoenetting.com
-        <!--div style display:none id="ITEMID=breelolistid"-->
-
-        <li>
-            <!---form action="/api/ProjectInventories" -->
+            <li>
+                <!---form action="/api/ProjectInventories" -->
         
-                <!--using (Html.BeginForm("PostProjectInventory", "ProjectInventories"))-->
-                <form action="/ProjectInventories/PostProjectInventory" method="post">
+                    <!--using (Html.BeginForm("PostProjectInventory", "ProjectInventories"))-->
+                    <form action="/ProjectInventories/PostProjectInventory" method="post">
 
-                <input type="submit" value="Add to Project" /> <!--PostProjectInventory-->
+                    <input type="submit" value="Add to Project" /> <!--PostProjectInventory-->
 
-                @Html.Hidden("InventoryId", (item as Inventory).InventoryID) 
-                @Html.Hidden("ProjectId", Model.ProjectId)
+                    @Html.Hidden("InventoryId", (item as Inventory).InventoryID) 
+                    @Html.Hidden("ProjectId", Model.ProjectId)
 
 
-               <!--- at item.Title -->
-                @item.FabricType
-                @item.FabricColor
-                @item.FabricUnit
-                @item.FabricAmount
-                </form>
-                <!--- input type="submit" name="add" value="add to project" /-->
+                   <!--- at item.Title -->
+                    @item.FabricType
+                    @item.FabricColor
+                    @item.FabricUnit
+                    @item.FabricAmount
+                    </form>
+                    <!--- input type="submit" name="add" value="add to project" /-->
             
-         <!--   delete from project attempt
-             <form action="/ProjectInventories/DeleteProjectInventory" method="delete">
-                --<button class="btn btn-info" name="delete" value="delete"></button> -->
-                <!----/form -->
-</li>
+             <!--   delete from project attempt
+                 <form action="/ProjectInventories/DeleteProjectInventory" method="delete">
+                    --<button class="btn btn-info" name="delete" value="delete"></button> -->
+                    <!----/form -->
+    </li>
     
-    }
- </ul>
+        }
+     </ul>
+</div><!--id="AllInventories div"-->
 
-    <!---    <script type="text/javascript">
-            function hello(Value) {
-            alert(value);
-         }
-        </script> -->
-    
