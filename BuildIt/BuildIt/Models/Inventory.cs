@@ -12,6 +12,7 @@ namespace BuildIt.Models
         [Key]
         public int InventoryID { get; set; }
         //private InventoryContext context;
+    //    public int ProjectId { get; set; }
         public ApplicationUser Owner { get; set; }
         [Display(Name ="Title")]
         public string Title { get; set; }
@@ -23,6 +24,7 @@ namespace BuildIt.Models
         public int FabricAmount { get; set; }
         [Display(Name = "Unit of Measurement")]
         public String FabricUnit { get; set; }
+  //      public virtual Project Project { get; set; }
         public virtual ICollection<ProjectInventory> ProjectInventories{ get; set; }
 
        
