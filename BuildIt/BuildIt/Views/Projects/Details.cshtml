@@ -1,5 +1,6 @@
 ﻿@model BuildIt.Models.Project
 @using BuildIt.Models
+@using System.Linq
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -33,16 +34,24 @@
             <!---- at Html.DisplayNameFor(model => model.ProjectInventories) -->
             Project Inventory
         </dt>
-        @for(var itemIndex=0; itemIndex < Model.ProjectInventories.Count(); itemIndex++ ) 
+        @for(var itemIndex=0; itemIndex < Model.ProjectInventories.Count; itemIndex++ )
         {
-    
         <dd>
             <!--AT Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.Title)-->
             @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricType)
             @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricColor)
             @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricAmount)
             @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricUnit)
-        </dd>
+           
+        <!--   delete from project attempt -->
+            <!--ask jen on setting ids to froms-->
+                <form action="/ProjectInventories/DeleteProjectInventory" method="post">
+                <button class="btn btn-info" name="delete" value="delete"></button>
+                    @Html.Hidden("ProjectId", Model.ProjectId)
+                    @Html.Hidden("ProjectInventoryIndex", itemIndex)
+                
+                  </form> 
+            </dd>
         }    
         
     </dl>
@@ -84,10 +93,10 @@
                     </form>
                     <!--- input type="submit" name="add" value="add to project" /-->
             
-             <!--   delete from project attempt
-                 <form action="/ProjectInventories/DeleteProjectInventory" method="delete">
-                    --<button class="btn btn-info" name="delete" value="delete"></button> -->
-                    <!----/form -->
+             <!--   delete from project attempt 
+                 <form action="/ProjectInventories/DeleteProjectInventory" method="post">
+                    class="btn btn-info" name="delete" value="delete"></button> 
+                    </form> -->
     </li>
     
         }

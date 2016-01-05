@@ -33,7 +33,7 @@ namespace BuildIt.Controllers
             {
                 return HttpNotFound();
             }
-            
+            ViewBag.ProjectInventories = project.ProjectInventories.ToList();
             ViewBag.Inventories = db.Inventories.ToList();
             //project.ProjectInventories = new List<ProjectInventory> {
             //    new ProjectInventory{ Inventory = new Inventory { Title = "asdf"} },
