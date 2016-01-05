@@ -45,8 +45,9 @@
            
         <!--   delete from project attempt -->
             <!--ask jen on setting ids to froms-->
-                <form action="/ProjectInventories/DeleteProjectInventory" method="post">
-                <button class="btn btn-info" name="delete" value="delete"></button>
+                <form action="/ProjectInventories/DeleteProjectInventory" method="post" >
+                <button class="btn btn-info" name="delete" value="delete">Delete</button>
+                   
                     @Html.Hidden("ProjectId", Model.ProjectId)
                     @Html.Hidden("ProjectInventoryIndex", itemIndex)
                 
@@ -90,7 +91,10 @@
                     @item.FabricColor
                     @item.FabricAmount
                     @item.FabricUnit
+
+                       
                     </form>
+
                     <!--- input type="submit" name="add" value="add to project" /-->
             
              <!--   delete from project attempt 
