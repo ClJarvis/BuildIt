@@ -92,10 +92,14 @@ namespace BuildIt.Controllers
         }
 
         // DELETE: api/ProjectInventories/5
-        [ResponseType(typeof(ProjectInventory))]
-        public IHttpActionResult DeleteProjectInventory(int id)
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("projectInventories/DeleteProjectInventory")]
+        public IHttpActionResult DeleteProjectInventory(FormDataCollection data)
         {
-            ProjectInventory projectInventory = context.ProjectInventories.Find(id);
+            int projectId = int.Parse(data.Get("ProjectId"));
+            int index = int.Parse(data.Get("ProjectInventoryIndex"));
+            Project project = context.Projects.Find(projectId);
+            ProjectInventory projectInventory = project.ProjectInventories.ToList<ProjectInventory>()[index];
             if (projectInventory == null)
             {
                 return NotFound();
@@ -104,7 +108,7 @@ namespace BuildIt.Controllers
             context.ProjectInventories.Remove(projectInventory);
             context.SaveChanges();
 
-            return Ok(projectInventory);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)

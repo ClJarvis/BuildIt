@@ -4,6 +4,10 @@
     align-content:center;
 }
 
+.container-fluid{
+    align-content: center;   
+}
+
 a {
   color: #37474f;
 }
