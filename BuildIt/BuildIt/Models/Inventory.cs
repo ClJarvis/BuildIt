@@ -12,7 +12,7 @@ namespace BuildIt.Models
         [Key]
         public int InventoryID { get; set; }
         //private InventoryContext context;
-    //    public int ProjectId { get; set; }
+
         public ApplicationUser Owner { get; set; }
         [Display(Name ="Title")]
         public string Title { get; set; }
