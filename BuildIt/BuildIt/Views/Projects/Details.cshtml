@@ -42,10 +42,33 @@
             @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricColor)
             @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricAmount)
             @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricUnit)
+
+            
+           
            
         <!--   delete from project attempt -->
-            <!--ask jen on setting ids to froms-->
-                <form action="/ProjectInventories/DeleteProjectInventory" method="post" >
+            <!--ask jen on setting ids to forms-->
+                <form action="/ProjectInventories/DeleteProjectInventory" method="post" 
+                       function autoRefresh()
+            {
+            var url    = "../../../support/ajaxTest.txt";
+            var target = document.getElementById("statusRefresh");
+
+            var doRefresh = function()
+            {
+            loadXMLDoc(url, function()
+            {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+            target.innerHTML=xmlhttp.responseText;
+            }
+            }
+            });
+
+            setInterval( doRefresh, 5000 );
+            } 
+            
+            document.onload = autoRefresh;>
                 <button class="btn btn-info" name="delete" value="delete">Delete</button>
                    
                     @Html.Hidden("ProjectId", Model.ProjectId)
