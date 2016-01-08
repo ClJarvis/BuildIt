@@ -9,23 +9,23 @@
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
+        <h2>Track Your Project</h2>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            With My Big Damn Project Tracker you can track fabrics, trim, and notions used to build your costumes.
+           <p> <b>What with the Name?</b>  It's a firefly reference. A friend said I need a better name
+        for my costume photos, so I used a quote from Firefly.
         </p>
-        @Html.ActionLink("Inventory", "Index", "Inventories")
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+      
     </div>
     <div class="col-md-4">
         <h2>Add Material to Your Inventory</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" @Html.ActionLink("Inventory", "Index", "Inventories")>Learn more &raquo;</a></p>
+        <p>Enter and log material as you aquire them.You can easily  add, remove, and update your fabric stash.</p>
+        <p><a class="btn btn-default" @Html.ActionLink("Inventory", "Index", "Inventories")</a></p>
     </div>
     <div class="col-md-4">
         <h2>Add Inventory to Your Projects</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <p>Once you begin a project you can move items from your Inventory to your Project. 
+        There you will have a itemized list of everything in your Big Damn Project.</p>
+        <p><a class="btn btn-default" @Html.ActionLink("Project", "Index", "Projects")</a></p>
     </div>
 </div>
