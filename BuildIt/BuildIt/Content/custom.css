@@ -12,6 +12,9 @@ a {
   color: #37474f;
 }
 
+.jumbotron {
+    text-align: center;
+}
 
 li {
     list-style:none;
