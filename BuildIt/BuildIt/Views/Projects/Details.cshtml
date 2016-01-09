@@ -9,67 +9,73 @@
 <h2>Current Project Details</h2>
 
 <div>
-    <h4>Project</h4>
+    <!---- auto load current project name <h4>Project Name</h4>  -->
     <hr />
-    <dl class="dl-horizontal">
+    <div class="row">
+        <div class="col-md-6">
+            <dl class="dl-horizontal">
 
-        <dt>
-           <!---- at Html.DisplayNameFor(model => model.ProjectName) -->
-            Project Name
-        </dt>
+                <dt>
+                    <!---- at Html.DisplayNameFor(model => model.ProjectName) -->
+                    Project Name
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ProjectName)
-        </dd>
+                <dd>
+                   <h3> @Html.DisplayFor(model => model.ProjectName) </h3>
+                </dd>
 
-        <dt>
-            <!---- at Html.DisplayNameFor(model => model.StartDate) -->
-            Start Date
-        </dt>
+                <dt>
+                    <!---- at Html.DisplayNameFor(model => model.StartDate) -->
+                    Start Date
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt>
-            <!---- at Html.DisplayNameFor(model => model.ProjectInventories) -->
-            Project Inventory
-        </dt>
-        @for(var itemIndex=0; itemIndex < Model.ProjectInventories.Count; itemIndex++ )
-        {
-        <dd>
-            <!--AT Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.Title)-->
-            @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricType)
-            @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricColor)
-            @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricAmount)
-            @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricUnit)
+                <dd>
+                    @Html.DisplayFor(model => model.StartDate)
+                </dd>
+                <dt>
+                    <!---- at Html.DisplayNameFor(model => model.ProjectInventories) -->
+                    Project Inventory
+                </dt>
+                @for (var itemIndex = 0; itemIndex < Model.ProjectInventories.Count; itemIndex++)
+                {
+                    <dd>
+                        <!--AT Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.Title)-->
+                        @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricType)
+                        @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricColor)
+                        @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricAmount)
+                        @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricUnit)
 
-            
-           
-           
-        <!--   delete from project attempt -->
-            <!--ask jen on setting ids to forms-->
-                <form action="/ProjectInventories/DeleteProjectInventory" method="post" 
-                      >
-                <button class="btn btn-info" name="delete" value="delete">Delete</button>
-                   
-                    @Html.Hidden("ProjectId", Model.ProjectId)
-                    @Html.Hidden("ProjectInventoryIndex", itemIndex)
-                
-                  </form> 
-            </dd>
-        }    
-        
-    </dl>
+
+
+
+                        <!--   delete from project attempt -->
+                        <!--ask jen on setting ids to forms-->
+                        <form action="/ProjectInventories/DeleteProjectInventory" method="post">
+                            <button class="btn btn-info" name="delete" value="delete">Delete</button>
+
+                            @Html.Hidden("ProjectId", Model.ProjectId)
+                            @Html.Hidden("ProjectInventoryIndex", itemIndex)
+
+                        </form>
+                    </dd>
+                }
+
+            </dl>
+
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.ProjectId }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div><!--details -->
+
+        <div class="col-md-6"><div id="banner"><img src="https://yodaarchives.files.wordpress.com/2016/01/abbysciuto_june16_012.jpeg" alt="abby" /> </div></div>
+    </div> <!--end row-->
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProjectId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
-
 <div id="AllInventories">
     <h2>Material Inventory</h2>
 
-      <ul >
+    <ul>
         @foreach (var item in ViewBag.Inventories)
         {
             // form POST method, make action point to a end point on projectsInventoy controller
@@ -80,34 +86,31 @@
 
             <li>
                 <!---form action="/api/ProjectInventories" -->
-        
-                    <!--using (Html.BeginForm("PostProjectInventory", "ProjectInventories"))-->
-                    <form action="/ProjectInventories/PostProjectInventory" method="post">
+                <!--using (Html.BeginForm("PostProjectInventory", "ProjectInventories"))-->
+                <form action="/ProjectInventories/PostProjectInventory" method="post">
 
                     <input type="submit" value="Add to Project" /> <!--PostProjectInventory-->
 
-                    @Html.Hidden("InventoryId", (item as Inventory).InventoryID) 
+                    @Html.Hidden("InventoryId", (item as Inventory).InventoryID)
                     @Html.Hidden("ProjectId", Model.ProjectId)
 
 
-                   <!--- at item.Title -->
+                    <!--- at item.Title -->
                     @item.FabricType
                     @item.FabricColor
                     @item.FabricAmount
                     @item.FabricUnit
 
-                       
-                    </form>
 
-                    <!--- input type="submit" name="add" value="add to project" /-->
-            
-             <!--   delete from project attempt 
-                 <form action="/ProjectInventories/DeleteProjectInventory" method="post">
-                    class="btn btn-info" name="delete" value="delete"></button> 
-                    </form> -->
-    </li>
-    
+                </form>
+
+                <!--- input type="submit" name="add" value="add to project" /-->
+                <!--   delete from project attempt
+                    <form action="/ProjectInventories/DeleteProjectInventory" method="post">
+                       class="btn btn-info" name="delete" value="delete"></button>
+                       </form> -->
+            </li>
+
         }
-     </ul>
+    </ul>
 </div><!--id="AllInventories div"-->
-
