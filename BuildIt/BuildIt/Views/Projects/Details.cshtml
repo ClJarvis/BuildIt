@@ -51,13 +51,14 @@
 
                         <!--   delete from project attempt -->
                         <!--ask jen on setting ids to forms-->
-                       <!---- <form action="/ProjectInventories/DeleteProjectInventory" method="post">
-                            <button class="btn btn-info" name="delete" value="delete">Delete</button>  -->
+                        <form action="/ProjectInventories/DeleteProjectInventory" method="post">
+                            <button class="btn btn-info" name="delete" value="delete">Delete</button>
 
                             @Html.Hidden("ProjectId", Model.ProjectId)
                             @Html.Hidden("ProjectInventoryIndex", itemIndex)
+                 
 
-                        <!----/form-->
+                        </form>
                     </dd>
                 }
 
