@@ -40,8 +40,9 @@
                 {
                     <dd>
                         <!--AT Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.Title)-->
-                        @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricType)
                         @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricColor)
+                        @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricType)
+                        
                         @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricAmount)
                         @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricUnit)
 
@@ -50,13 +51,13 @@
 
                         <!--   delete from project attempt -->
                         <!--ask jen on setting ids to forms-->
-                        <form action="/ProjectInventories/DeleteProjectInventory" method="post">
-                            <button class="btn btn-info" name="delete" value="delete">Delete</button>
+                       <!---- <form action="/ProjectInventories/DeleteProjectInventory" method="post">
+                            <button class="btn btn-info" name="delete" value="delete">Delete</button>  -->
 
                             @Html.Hidden("ProjectId", Model.ProjectId)
                             @Html.Hidden("ProjectInventoryIndex", itemIndex)
 
-                        </form>
+                        <!----/form-->
                     </dd>
                 }
 
@@ -68,7 +69,12 @@
             </p>
         </div><!--details -->
 
-        <div class="col-md-6"><div id="banner"><img src="https://yodaarchives.files.wordpress.com/2016/01/abbysciuto_june16_012.jpeg" alt="abby" /> </div></div>
+        <div class="col-md-6">
+            <div id="banner"><img src="https://yodaarchives.files.wordpress.com/2016/01/abbysciuto_june16_012.jpeg" alt="abby" />
+          <!---  <img src="https://yodaarchives.files.wordpress.com/2016/01/bkcanary_june16_022.jpeg" />
+            <img src="https://yodaarchives.files.wordpress.com/2016/01/bkcanary_june16_4x6.jpeg"/> -->
+             </div>
+        </div>
     </div> <!--end row-->
 
 </div>

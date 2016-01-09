@@ -26,7 +26,7 @@
     @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ProjectName)
+               <b> @Html.DisplayFor(modelItem => item.ProjectName)</b>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StartDate)
@@ -41,5 +41,8 @@
 
       </table> 
     </div><!--END TABLE COL-->
-    <div class="col-md-6"><div id="banner"><img src="https://yodaarchives.files.wordpress.com/2016/01/kayleeprint.jpeg" alt="abby" /> </div></div>
+    <div class="col-md-6">
+        <div id="banner"><img src="https://yodaarchives.files.wordpress.com/2016/01/kayleeprint.jpeg" alt="abby" /> 
+        </div>
+    </div>
 </div> <!--end row-->      
