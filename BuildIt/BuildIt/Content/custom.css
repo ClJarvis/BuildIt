@@ -1,6 +1,6 @@
 ﻿body { 
-    background-color: white;
-    color: #37474f;
+    background-color: #222222;
+    color: white; //#37474f ;
     align-content:center;
 }
 
@@ -9,24 +9,28 @@
 }
 
 a {
-  color: #37474f;
+  color: #607D8B; //#37474f;
 }
 
 h2 {
-    background-color: #90A4AE;
+    background-color: #000000;
+    color: white;
     padding: 15px;
     
 }
 
 .jumbotron {
     text-align: center;
+    background-color: #000000;
+    color: white;
 }
 
 #banner img{
     margin: 0 auto;
     max-width: 500px;
     max-height: 700px;
-
+    box-shadow:  0 0 15px #607D8B;
+    margin-bottom: 10px;
 }
 
 
@@ -59,7 +63,7 @@ input, .btn-default {
 }
 
 .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus, .navbar-nav > li > a {
-    color: black;
+    color: #E18728; //black;
     background-color: transparent;
 }
 
