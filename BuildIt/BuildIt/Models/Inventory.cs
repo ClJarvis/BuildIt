@@ -14,12 +14,13 @@ namespace BuildIt.Models
         //private InventoryContext context;
 
         public ApplicationUser Owner { get; set; }
-        [Display(Name ="Title")]
+        [Display(Name ="Print")]
         public string Title { get; set; }
+        [Display(Name = "Color")]
+        public String FabricColor { get; set; }
         [Display(Name = "Kind of Fabric")]
         public String FabricType { get; set; }
-       [Display(Name ="Color")]
-        public String FabricColor { get; set; }
+     
         [Display(Name = "Amount")]
         public int FabricAmount { get; set; }
         [Display(Name = "Unit of Measurement")]
