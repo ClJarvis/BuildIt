@@ -12,13 +12,23 @@ a {
   color: #37474f;
 }
 
+h2 {
+    background-color: #90A4AE;
+    padding: 15px;
+    
+}
+
 .jumbotron {
     text-align: center;
 }
 
-#banner {
+#banner img{
     margin: 0 auto;
+    max-width: 500px;
+    max-height: 700px;
+
 }
+
 
 li {
     list-style:none;
