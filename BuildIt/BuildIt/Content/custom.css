@@ -10,6 +10,11 @@
 
 a {
   color: #607D8B; //#37474f;
+  font-size: .9em;
+}
+
+a:hover {
+    color: white;
 }
 
 h2 {
@@ -23,6 +28,7 @@ h2 {
     text-align: center;
     background-color: #000000;
     color: white;
+    margin-top: 15px;
 }
 
 #banner img{
@@ -50,7 +56,8 @@ input, .btn-default {
 }
 
  .navbar {
-    background: #607D8B;
+    background: #616161; //#607D8B;
+    box-shadow:  0 2px 0 white;
 } 
 
 .navbar-inverse .navbar-brand {
@@ -63,13 +70,15 @@ input, .btn-default {
 }
 
 .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus, .navbar-nav > li > a {
-    color: #E18728; //black;
+    color: white; //black;
     background-color: transparent;
 }
 
 #AllInventories {
-    background-color: #CFD8DC;
+    background-color: #424242;
+    color: #607D8B;
     padding-top: 2px;
     padding-bottom: 10px;
     padding-left: 4px;
 }
+
