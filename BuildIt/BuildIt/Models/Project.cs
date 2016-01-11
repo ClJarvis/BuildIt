@@ -8,16 +8,18 @@ namespace BuildIt.Models
 {
     public class Project
     {
-        [Key] 
+        [Key]
         public int ProjectId { get; set; }
         [Display(Name = "Project Name")]
-        public string ProjectName { get; set; } 
+        public string ProjectName { get; set; }
         //public int UserID { get; set; }
         public ApplicationUser Owner { get; set; }
         [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
+        //DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yy}")
 
-       
+
+
         public virtual ICollection<ProjectInventory> ProjectInventories { get; set; }
 
         public Project() { }
