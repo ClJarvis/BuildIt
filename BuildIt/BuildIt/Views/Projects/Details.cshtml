@@ -2,12 +2,14 @@
 @using BuildIt.Models
 @using System.Linq
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
- var imagePath = "";
+        ViewBag.Title = "Details";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+@{ 
+    var imagePath = "";
     if (Request["photoChoice"] != null)
     {
-        imagePath = @"images\" + Request["photoChoice"];
+        imagePath =  Request["photoChoice"];
     }
 }
 
@@ -80,9 +82,9 @@
             <form method="post" action="">
                 <div>
                     <select name="photoChoice">
-                        <option value="https://yodaarchives.files.wordpress.com/2016/01/abbysciuto_june16_012.jpeg">Photo 1</option>
+                        <option value="~/Content/images/abby.jpg" alt="abby">Photo 1</option>
                         <option value="~/Content/images/bkcanary.jpg">Photo 2</option>
-                        <option value="bkcanary3.jpg">Photo 3</option>
+                        <option value="/Content/images/bkcanary2.jpeg">Photo 3</option>
                     </select>
                     &nbsp;
                     <input type="submit" value="Submit" />
@@ -94,8 +96,9 @@
                     }
                 </div>
             </form>  
-            <div id="banner"><img src="~/Content/images/bkcanary.jpg" alt="abby" />
-          <!---  <img src="https://yodaarchives.files.wordpress.com/2016/01/bkcanary_june16_022.jpeg" />
+            <div id="banner"><img src="~/Content/images/bkcanary.jpg" alt="black canary" />
+          <!---  <img src="~/Content/images/abby.jpg" alt="abby" />
+               <img src="https://yodaarchives.files.wordpress.com/2016/01/bkcanary_june16_022.jpeg" />
             <img src="https://yodaarchives.files.wordpress.com/2016/01/bkcanary_june16_4x6.jpeg"/> -->
              </div>
         </div>
