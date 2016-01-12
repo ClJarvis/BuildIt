@@ -2,18 +2,18 @@
 @using BuildIt.Models
 @using System.Linq
 @{
-        ViewBag.Title = "Details";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
-@{ 
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
     var imagePath = "";
     if (Request["photoChoice"] != null)
     {
-        imagePath =  Request["photoChoice"];
+        imagePath = Request["photoChoice"];
     }
 }
 
-<h2>Current Project Details</h2>
+<h2>Current Costume Details</h2>
 
 <div>
     <!---- auto load current project name <h4>Project Name</h4>  -->
@@ -28,7 +28,7 @@
                 </dt>
 
                 <dd>
-                   <h3> @Html.DisplayFor(model => model.ProjectName) </h3>
+                    <h3> @Html.DisplayFor(model => model.ProjectName) </h3>
                 </dd>
 
                 <dt>
@@ -49,7 +49,7 @@
                         <!--AT Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.Title)-->
                         @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricColor)
                         @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricType)
-                        
+
                         @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricAmount)
                         @Html.DisplayFor(model => model.ProjectInventories.ToList()[itemIndex].Inventory.FabricUnit)
 
@@ -61,9 +61,9 @@
                         <form action="/ProjectInventories/DeleteProjectInventory" method="post">
                             <button class="btn btn-info" name="delete" value="delete">Delete</button> -->
 
-                            @Html.Hidden("ProjectId", Model.ProjectId)
-                            @Html.Hidden("ProjectInventoryIndex", itemIndex)
-                 
+                        @Html.Hidden("ProjectId", Model.ProjectId)
+                        @Html.Hidden("ProjectInventoryIndex", itemIndex)
+
 
                         <!----/form -->
                     </dd>
@@ -75,75 +75,81 @@
                 @Html.ActionLink("Edit", "Edit", new { id = Model.ProjectId }) |
                 @Html.ActionLink("Back to List", "Index")
             </p>
+
+
+
+
+            <div id="AllInventories">
+                <h2>Material Inventory</h2>
+
+                <ul>
+                    @foreach (var item in ViewBag.Inventories)
+                    {
+                        // form POST method, make action point to a end point on projectsInventoy controller
+                        //pass Model.Projectid and Id of current inventoryItem
+                        // form element 2 input type buttons add/delete
+                        //mikedoenetting.com
+
+
+                        <li>
+                            <!---form action="/api/ProjectInventories" -->
+                            <!--using (Html.BeginForm("PostProjectInventory", "ProjectInventories"))-->
+                            <form action="/ProjectInventories/PostProjectInventory" method="post">
+
+                                <input type="submit" value="Add to Project" /> <!--PostProjectInventory-->
+
+                                @Html.Hidden("InventoryId", (item as Inventory).InventoryID)
+                                @Html.Hidden("ProjectId", Model.ProjectId)
+
+
+                                <!--- at item.Title -->
+                                @item.FabricType
+                                @item.FabricColor
+                                @item.FabricAmount
+                                @item.FabricUnit
+
+
+                            </form>
+
+                            <!--- input type="submit" name="add" value="add to project" /-->
+                            <!--   delete from project attempt
+                                <form action="/ProjectInventories/DeleteProjectInventory" method="post">
+                                   class="btn btn-info" name="delete" value="delete"></button>
+                                   </form> -->
+                        </li>
+
+                    }
+                </ul>
+            </div><!--id="AllInventories div"-->
+
+
         </div><!--details -->
 
         <div class="col-md-6">
-           <h1>Project Images</h1>
+            <h1>Reference Images</h1>
             <form method="post" action="">
                 <div>
                     <select name="photoChoice">
-                        <option value="~/Content/images/abby.jpg" alt="abby">Photo 1</option>
-                        <option value="~/Content/images/bkcanary.jpg">Photo 2</option>
-                        <option value="/Content/images/bkcanary2.jpeg">Photo 3</option>
+                        <option class="banner" value="~/Content/images/bkcanary.jpg" alt="black canary">Canary Scream</option>
+                        <option value="~/Content/images/bkcanary_2.jpg">Canary Full Body</option>
+                        <option value="/Content/images/Canary_headshot.jpeg">Canary Headshot</option>
                     </select>
                     &nbsp;
                     <input type="submit" value="Submit" />
                 </div>
-                <div style="padding:10px;">
+                <div style="padding:10px;" id="banner">
                     @if (imagePath != "")
             {
-                        <img src="@imagePath" alt="Sample Image" width="300px" />
+                        <img src="@imagePath" alt="Sample Image" height="700px" width="500px" />
                     }
                 </div>
-            </form>  
-            <div id="banner"><img src="~/Content/images/bkcanary.jpg" alt="black canary" />
-          <!---  <img src="~/Content/images/abby.jpg" alt="abby" />
-               <img src="https://yodaarchives.files.wordpress.com/2016/01/bkcanary_june16_022.jpeg" />
-            <img src="https://yodaarchives.files.wordpress.com/2016/01/bkcanary_june16_4x6.jpeg"/> -->
-             </div>
+            </form>
+            <!-- <div id="banner"><img src="~/Content/images/bkcanary.jpg" alt="black canary" />
+             <img src="~/Content/images/abby.jpg" alt="abby" />
+                <img src="https://yodaarchives.files.wordpress.com/2016/01/bkcanary_june16_022.jpeg" />
+             <img src="https://yodaarchives.files.wordpress.com/2016/01/bkcanary_june16_4x6.jpeg"/>
+              </div> -->
         </div>
     </div> <!--end row-->
 
 </div>
-<div id="AllInventories">
-    <h2>Material Inventory</h2>
-
-    <ul>
-        @foreach (var item in ViewBag.Inventories)
-        {
-            // form POST method, make action point to a end point on projectsInventoy controller
-            //pass Model.Projectid and Id of current inventoryItem
-            // form element 2 input type buttons add/delete
-            //mikedoenetting.com
-            <!--div style display:none id="ITEMID=brellolistid"-->
-
-            <li>
-                <!---form action="/api/ProjectInventories" -->
-                <!--using (Html.BeginForm("PostProjectInventory", "ProjectInventories"))-->
-                <form action="/ProjectInventories/PostProjectInventory" method="post">
-
-                    <input type="submit" value="Add to Project" /> <!--PostProjectInventory-->
-
-                    @Html.Hidden("InventoryId", (item as Inventory).InventoryID)
-                    @Html.Hidden("ProjectId", Model.ProjectId)
-
-
-                    <!--- at item.Title -->
-                    @item.FabricType
-                    @item.FabricColor
-                    @item.FabricAmount
-                    @item.FabricUnit
-
-
-                </form>
-
-                <!--- input type="submit" name="add" value="add to project" /-->
-                <!--   delete from project attempt
-                    <form action="/ProjectInventories/DeleteProjectInventory" method="post">
-                       class="btn btn-info" name="delete" value="delete"></button>
-                       </form> -->
-            </li>
-
-        }
-    </ul>
-</div><!--id="AllInventories div"-->
