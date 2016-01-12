@@ -40,6 +40,15 @@ h2 {
     margin-bottom: 10px;
 }
 
+.banner img{
+    margin: 0 auto;
+    max-width: 500px;
+    max-height: 700px;
+    border: 2px solid black;
+    box-shadow:  0 0 15px #607D8B;
+    margin-bottom: 10px;
+}
+
 
 li {
     list-style:none;
@@ -81,5 +90,6 @@ input, .btn-default {
     padding-top: 2px;
     padding-bottom: 10px;
     padding-left: 4px;
+    padding-right: 4px;
 }
 
