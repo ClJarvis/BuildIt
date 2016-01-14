@@ -14,7 +14,7 @@ namespace BuildIt.Models
         //private InventoryContext context;
 
         public ApplicationUser Owner { get; set; }
-        [Display(Name ="Print/Part #")]
+        [Display(Name ="Print/Part Number")]
         public string Title { get; set; }
         [Display(Name = "Color")]
         public String FabricColor { get; set; }
