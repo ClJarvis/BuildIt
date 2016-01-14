@@ -16,8 +16,8 @@ namespace BuildIt.Models
         public ApplicationUser Owner { get; set; }
         [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
-        //DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yy}")
-
+        //NEXT STEP ADD PHOTO UPLOAD BY URL ON WHEEN PROJECT IS CREATED.
+       
 
 
         public virtual ICollection<ProjectInventory> ProjectInventories { get; set; }
