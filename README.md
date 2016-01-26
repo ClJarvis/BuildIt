@@ -17,7 +17,7 @@ Track time and materials used to build costumes. Either to track for personal pr
 
 ## Advanced Features (stretch features)
 
-1. User can upload project pictures and store in a swiple file for reference.(currently have images stored locally)
+1. User can upload project pictures and store in a swiple file for reference.(currently have images stored locally, but attempting upload from local machine.)
 2. User will be able to input time spent building the project via time and date form.
 3. User will be able to total time spent on project.
 
