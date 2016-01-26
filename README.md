@@ -4,7 +4,7 @@
 
 ## Summary
 
-Track time and materials used to build costumes. Either to track for personal projects or to track a contracted build for a client. This will be a CRUD app built with C#, CSS, HTML5, Json, and ASP>NET MVC.
+Track time and materials used to build costumes. Either to track for personal projects or to track a contracted build for a client. This will be a CRUD app built with C#, CSS, HTML5, JSON, and ASP.NET MVC.
 ## Basic Features
 
 1. User will be able to register for Build It.
@@ -12,13 +12,13 @@ Track time and materials used to build costumes. Either to track for personal pr
 3. System will be automatically subtract material used in project from inventory.
 4. User will be able to create a project and set a start date.
 5. User can delete items from inventory	
-6  User can delete a project 
+6. User can delete a project 
 
 
 ## Advanced Features (stretch features)
 
 1. User can upload project pictures and store in a swiple file for reference.(currently have images stored locally)
-2. User will be able to input time spent building the project. time and date form
+2. User will be able to input time spent building the project via time and date form.
 3. User will be able to total time spent on project.
 
 	
